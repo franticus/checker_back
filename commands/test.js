@@ -34,6 +34,37 @@ function checkHtmlFiles(directory) {
         }
       });
 
+      $('form').each((i, form) => {
+        const action = $(form).attr('action');
+        if (!action || !action.endsWith('.php')) {
+          results.push(
+            `Отсутствует или некорректный атрибут action у формы в файле: ${filename}`
+          );
+        }
+
+        $(form)
+          .find('input')
+          .each((j, input) => {
+            if (!$(input).attr('required')) {
+              results.push(
+                `Отсутствует атрибут required у input в файле: ${filename}`
+              );
+            }
+            if (!$(input).attr('name')) {
+              results.push(
+                `Отсутствует атрибут name у input в файле: ${filename}`
+              );
+            }
+          });
+
+        const textareaStyle = $(form).find('textarea').attr('style');
+        if (textareaStyle && !textareaStyle.includes('resize: none')) {
+          results.push(
+            `У textarea отсутствует свойство resize: none в файле: ${filename}`
+          );
+        }
+      });
+
       const title = $('title').text();
       const description = $('meta[name="description"]').attr('content');
 
@@ -48,25 +79,28 @@ function checkHtmlFiles(directory) {
         const $ = cheerio.load(content);
         const links = $('a');
 
-        links.each((i, link) => {
+        for (let i = 0; i < links.length; i++) {
+          const link = links[i];
           const href = $(link).attr('href');
           if (href) {
-            if (href === '#' || href === '') {
-              results.push(
-                `Недопустимая ссылка (href="${href}") обнаружена в файле: ${filename}`
-              );
+            if (
+              href === '' ||
+              href.startsWith('#') ||
+              href.endsWith('.html') ||
+              href.includes('#')
+            ) {
+              continue;
             } else if (
               !href.includes('http') &&
               !href.includes('tel:') &&
-              !href.includes('mailto') &&
-              !href.endsWith('.html')
+              !href.includes('mailto')
             ) {
               results.push(
                 `Недопустимая ссылка (href: ${href}) обнаружена в файле: ${filename}`
               );
             }
           }
-        });
+        }
       }
     }
   });
