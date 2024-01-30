@@ -12,15 +12,13 @@ app.post('/upload', (req, res) => {
 
   let uploadedFile = req.files.file;
 
-  // Сохранение файла в корневой директории сайта
-  uploadedFile.mv(`${__dirname}/${uploadedFile.name}`, function (err) {
+  uploadedFile.mv(`commands/${uploadedFile.name}`, function (err) {
     if (err) {
       return res.status(500).send(err);
     }
 
-    // Запуск скрипта test.js для обработки файла
     exec(
-      `node /commands/test.js ${uploadedFile.name}`,
+      `node commands/test.js ${uploadedFile.name}`,
       (error, stdout, stderr) => {
         if (error) {
           console.error(`exec error: ${error}`);
@@ -29,7 +27,7 @@ app.post('/upload', (req, res) => {
         console.log(`stdout: ${stdout}`);
         console.error(`stderr: ${stderr}`);
 
-        res.send('Файл обработан');
+        res.send(stdout);
       }
     );
   });

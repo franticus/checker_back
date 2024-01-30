@@ -19,6 +19,7 @@ function readFiles(directory, onFileContent) {
 function checkHtmlFiles(directory) {
   const titles = new Set();
   const descriptions = new Set();
+  const results = [];
 
   readFiles(directory, (filename, content) => {
     if (filename.endsWith('.html')) {
@@ -29,7 +30,7 @@ function checkHtmlFiles(directory) {
       forms.each((i, form) => {
         if ($(form).find('input[type="checkbox"]').length === 0) {
           formCheck = false;
-          console.log(`Форма без чекбокса найдена в файле: ${filename}`);
+          results.push(`Форма без чекбокса найдена в файле: ${filename}`);
         }
       });
 
@@ -37,13 +38,17 @@ function checkHtmlFiles(directory) {
       const description = $('meta[name="description"]').attr('content');
 
       if (titles.has(title) || descriptions.has(description)) {
-        console.log(`Дублированные мета теги найдены в файле: ${filename}`);
+        results.push(`Дублированные мета теги найдены в файле: ${filename}`);
       } else {
         titles.add(title);
         descriptions.add(description);
       }
     }
   });
+
+  results.push('Сканирование завершено');
+
+  console.log(results.join(','));
 }
 
 function unpackAndCheckZip(zipFilePath) {
@@ -51,12 +56,12 @@ function unpackAndCheckZip(zipFilePath) {
   const extractPath = path.join(__dirname, 'temp_extracted');
 
   zip.extractAllTo(extractPath, true);
-  console.log(`ZIP extracted to '${extractPath}'`);
 
   checkHtmlFiles(extractPath);
 
   fs.rmdirSync(extractPath, { recursive: true });
-  console.log(`Extracted files removed from '${extractPath}'`);
+
+  fs.unlinkSync(zipFilePath);
 }
 
 function findZipFiles(directory) {
@@ -70,10 +75,9 @@ function processZipFiles(directory) {
 
   zipFiles.forEach(zipFile => {
     const zipFilePath = path.join(directory, zipFile);
-    console.log(`Processing ZIP file: ${zipFilePath}`);
     unpackAndCheckZip(zipFilePath);
   });
 }
 
-const directory = path.join(__dirname, '..');
+const directory = path.join(__dirname);
 processZipFiles(directory);
