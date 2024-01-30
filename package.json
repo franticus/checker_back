@@ -1,0 +1,29 @@
+{
+  "name": "renamer",
+  "version": "6.3.0",
+  "bin": {
+    "clean": "node ./commands/cleaner.js",
+    "rename": "node ./commands/renamer.js",
+    "cssdel": "node ./commands/cssdel.js",
+    "txtmap": "node ./commands/txtmap.js",
+    "txtapply": "node ./commands/txtapply.js",
+    "del": "node ./commands/del.js"
+  },
+  "scripts": {
+    "tomap": "npm run clean && npm run rename && npm run cssdel && npm run txtmap",
+    "toapply": "npm run clean && npm run rename && npm run cssdel && npm run txtmap && npm run txtapply",
+    "clean": "node ./commands/cleaner.js",
+    "rename": "node ./commands/renamer.js",
+    "cssdel": "node ./commands/cssdel.js",
+    "txtmap": "node ./commands/txtmap.js",
+    "txtapply": "node ./commands/txtapply.js",
+    "del": "node ./commands/del.js"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.10",
+    "cheerio": "^1.0.0-rc.12",
+    "css": "^3.0.0",
+    "parse5": "^7.1.2",
+    "purgecss": "^5.0.0"
+  }
+}
