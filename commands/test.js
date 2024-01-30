@@ -92,7 +92,9 @@ async function checkHtmlFiles(directory) {
     }
   }
 
-  const files = await fs.readdir(directory);
+  // Фильтр для исключения скрытых файлов
+  const filterHiddenFiles = file => !file.startsWith('.');
+  const files = (await fs.readdir(directory)).filter(filterHiddenFiles);
 
   for (const filename of files) {
     const filePath = path.join(directory, filename);
@@ -106,8 +108,12 @@ async function checkHtmlFiles(directory) {
     }
   }
 
-  results.push('Сканирование завершено');
-  console.log(results.join(','));
+  console.log(
+    results
+      .map(result => result.trim())
+      .filter(result => result !== '')
+      .join(', ')
+  );
 }
 
 async function unpackAndCheckZip(zipFilePath) {

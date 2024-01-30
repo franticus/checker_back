@@ -1,6 +1,6 @@
 const express = require('express');
 const fileUpload = require('express-fileupload');
-const { exec } = require('child_process');
+const spawn = require('cross-spawn');
 const app = express();
 
 app.use(fileUpload());
@@ -17,19 +17,28 @@ app.post('/upload', (req, res) => {
       return res.status(500).send(err);
     }
 
-    exec(
-      `node commands/test.js ${uploadedFile.name}`,
-      (error, stdout, stderr) => {
-        if (error) {
-          console.error(`exec error: ${error}`);
-          return res.status(500).send(`Error during file processing: ${error}`);
-        }
-        console.log(`stdout: ${stdout}`);
-        console.error(`stderr: ${stderr}`);
+    const child = spawn('node', ['commands/test.js', uploadedFile.name]);
+    const results = []; // Создаем массив для хранения результатов
 
-        res.send(stdout);
+    child.stdout.on('data', data => {
+      const stdout = data.toString().replace(/\n/g, '');
+      console.log(`stdout: ${stdout}`);
+      results.push(stdout); // Сохраняем результат обработки
+    });
+
+    child.stderr.on('data', data => {
+      const stderr = data.toString().replace(/\n/g, '');
+      console.error(`stderr: ${stderr}`);
+      results.push(`Error during file processing: ${stderr}`); // Добавляем ошибку к результатам
+    });
+
+    child.on('close', () => {
+      if (results.length === 0 || (results.length === 1 && results[0] === '')) {
+        return res.status(500).send('No results found.');
       }
-    );
+      // Отправляем результаты клиенту после завершения всех обработок
+      res.send(results.filter(result => result !== '').join(', '));
+    });
   });
 });
 
