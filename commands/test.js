@@ -43,6 +43,31 @@ function checkHtmlFiles(directory) {
         titles.add(title);
         descriptions.add(description);
       }
+
+      if (filename.endsWith('.html')) {
+        const $ = cheerio.load(content);
+        const links = $('a');
+
+        links.each((i, link) => {
+          const href = $(link).attr('href');
+          if (href) {
+            if (href === '#' || href === '') {
+              results.push(
+                `Недопустимая ссылка (href="${href}") обнаружена в файле: ${filename}`
+              );
+            } else if (
+              !href.includes('http') &&
+              !href.includes('tel:') &&
+              !href.includes('mailto') &&
+              !href.endsWith('.html')
+            ) {
+              results.push(
+                `Недопустимая ссылка (href: ${href}) обнаружена в файле: ${filename}`
+              );
+            }
+          }
+        });
+      }
     }
   });
 
