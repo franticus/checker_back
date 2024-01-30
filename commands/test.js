@@ -1,27 +1,14 @@
-const fs = require('fs');
+const fs = require('fs-extra');
 const path = require('path');
 const cheerio = require('cheerio');
 const AdmZip = require('adm-zip');
 
-function readFiles(directory, onFileContent) {
-  fs.readdirSync(directory).forEach(filename => {
-    const filePath = path.join(directory, filename);
-    const stat = fs.statSync(filePath);
-    if (stat.isFile()) {
-      const content = fs.readFileSync(filePath, 'utf-8');
-      onFileContent(filename, content);
-    } else if (stat.isDirectory()) {
-      readFiles(filePath, onFileContent);
-    }
-  });
-}
-
-function checkHtmlFiles(directory) {
+async function checkHtmlFiles(directory) {
   const titles = new Set();
   const descriptions = new Set();
   const results = [];
 
-  readFiles(directory, (filename, content) => {
+  async function processFile(filename, content) {
     if (filename.endsWith('.html')) {
       const $ = cheerio.load(content);
       const forms = $('form');
@@ -103,39 +90,46 @@ function checkHtmlFiles(directory) {
         }
       }
     }
-  });
+  }
+
+  const files = await fs.readdir(directory);
+
+  for (const filename of files) {
+    const filePath = path.join(directory, filename);
+    const stat = await fs.stat(filePath);
+
+    if (stat.isFile()) {
+      const content = await fs.readFile(filePath, 'utf-8');
+      await processFile(filename, content);
+    } else if (stat.isDirectory()) {
+      await checkHtmlFiles(filePath);
+    }
+  }
 
   results.push('Сканирование завершено');
-
   console.log(results.join(','));
 }
 
-function unpackAndCheckZip(zipFilePath) {
+async function unpackAndCheckZip(zipFilePath) {
   const zip = new AdmZip(zipFilePath);
   const extractPath = path.join(__dirname, 'temp_extracted');
 
   zip.extractAllTo(extractPath, true);
 
-  checkHtmlFiles(extractPath);
+  await checkHtmlFiles(extractPath);
 
-  fs.rmdirSync(extractPath, { recursive: true });
-
-  fs.unlinkSync(zipFilePath);
+  await fs.remove(extractPath);
+  await fs.unlink(zipFilePath);
 }
 
-function findZipFiles(directory) {
-  return fs
-    .readdirSync(directory)
-    .filter(file => path.extname(file) === '.zip');
-}
+async function processZipFiles(directory) {
+  const files = await fs.readdir(directory);
+  const zipFiles = files.filter(file => path.extname(file) === '.zip');
 
-function processZipFiles(directory) {
-  const zipFiles = findZipFiles(directory);
-
-  zipFiles.forEach(zipFile => {
+  for (const zipFile of zipFiles) {
     const zipFilePath = path.join(directory, zipFile);
-    unpackAndCheckZip(zipFilePath);
-  });
+    await unpackAndCheckZip(zipFilePath);
+  }
 }
 
 const directory = path.join(__dirname);
