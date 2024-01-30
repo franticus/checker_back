@@ -30,8 +30,6 @@ function checkHtmlFiles(directory) {
         if ($(form).find('input[type="checkbox"]').length === 0) {
           formCheck = false;
           console.log(`Форма без чекбокса найдена в файле: ${filename}`);
-        } else {
-          console.log(`Формы без чекбокса отсутствуют`);
         }
       });
 
@@ -61,5 +59,21 @@ function unpackAndCheckZip(zipFilePath) {
   console.log(`Extracted files removed from '${extractPath}'`);
 }
 
-const zipFilePath = './New_v9_LibraBooks.zip';
-unpackAndCheckZip(zipFilePath);
+function findZipFiles(directory) {
+  return fs
+    .readdirSync(directory)
+    .filter(file => path.extname(file) === '.zip');
+}
+
+function processZipFiles(directory) {
+  const zipFiles = findZipFiles(directory);
+
+  zipFiles.forEach(zipFile => {
+    const zipFilePath = path.join(directory, zipFile);
+    console.log(`Processing ZIP file: ${zipFilePath}`);
+    unpackAndCheckZip(zipFilePath);
+  });
+}
+
+const directory = path.join(__dirname, '..');
+processZipFiles(directory);
