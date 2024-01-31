@@ -20,9 +20,7 @@
     "fs-extra": "^11.2.0",
     "open": "^10.0.3",
     "parse5": "^7.1.2",
+    "cross-env": "^7.0.3",
     "purgecss": "^5.0.0"
-  },
-  "devDependencies": {
-    "cross-env": "^7.0.3"
   }
 }
