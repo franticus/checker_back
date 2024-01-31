@@ -30,14 +30,22 @@ async function checkHtmlFiles(directory) {
         }
 
         $(form)
-          .find('input')
+          .find('input:not([type="submit"])')
           .each((j, input) => {
-            if (!$(input).attr('required')) {
+            const inputElement = $(input);
+            const hasRequired =
+              inputElement.attr('required') === '' ||
+              inputElement.attr('required') === 'required';
+
+            if (!hasRequired) {
               results.push(
                 `Отсутствует атрибут required у input в файле: ${filename}`
               );
             }
-            if (!$(input).attr('name')) {
+
+            const hasName = inputElement.attr('name') !== undefined;
+
+            if (!hasName) {
               results.push(
                 `Отсутствует атрибут name у input в файле: ${filename}`
               );
