@@ -43,6 +43,13 @@ app.post('/upload', (req, res) => {
   });
 });
 
-app.listen(3000, () => {
+app.listen(3000, async () => {
   console.log('Сервер запущен на порту 3000');
+
+  try {
+    const open = (await import('open')).default;
+    open('https://checkersite.netlify.app/');
+  } catch (err) {
+    console.error(`Ошибка при открытии сайта: ${err.message}`);
+  }
 });
