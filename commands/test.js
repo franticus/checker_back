@@ -97,6 +97,24 @@ async function checkHtmlFiles(directory) {
           }
         }
       }
+
+      if (filename.endsWith('.html')) {
+        const $ = cheerio.load(content);
+
+        const links = $('a[href^="#"]');
+        links.each((i, link) => {
+          const href = $(link).attr('href');
+          if (href.length > 1) {
+            const anchorId = href.substring(1);
+            const target = $(`#${anchorId}`);
+            if (target.length === 0) {
+              results.push(
+                `Отсутствует якорь для ссылки ${href} в файле: ${filename}`
+              );
+            }
+          }
+        });
+      }
     }
   }
 
