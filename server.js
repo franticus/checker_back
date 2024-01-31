@@ -18,25 +18,24 @@ app.post('/upload', (req, res) => {
     }
 
     const child = spawn('node', ['commands/test.js', uploadedFile.name]);
-    const results = []; // Создаем массив для хранения результатов
+    const results = [];
 
     child.stdout.on('data', data => {
       const stdout = data.toString().replace(/\n/g, '');
       console.log(`stdout: ${stdout}`);
-      results.push(stdout); // Сохраняем результат обработки
+      results.push(stdout);
     });
 
     child.stderr.on('data', data => {
       const stderr = data.toString().replace(/\n/g, '');
       console.error(`stderr: ${stderr}`);
-      results.push(`Error during file processing: ${stderr}`); // Добавляем ошибку к результатам
+      results.push(`Error during file processing: ${stderr}`);
     });
 
     child.on('close', () => {
       if (results.length === 0 || (results.length === 1 && results[0] === '')) {
         return res.status(500).send('No results found.');
       }
-      // Отправляем результаты клиенту после завершения всех обработок
       res.send(results.filter(result => result !== '').join(', '));
     });
   });
