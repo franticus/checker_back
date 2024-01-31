@@ -100,7 +100,6 @@ async function checkHtmlFiles(directory) {
     }
   }
 
-  // Фильтр для исключения скрытых файлов
   const filterHiddenFiles = file => !file.startsWith('.');
   const files = (await fs.readdir(directory)).filter(filterHiddenFiles);
 
