@@ -3,6 +3,9 @@ const path = require('path');
 const cheerio = require('cheerio');
 const AdmZip = require('adm-zip');
 
+const emailAddresses = new Set();
+const phoneNumbers = new Set();
+
 async function processHtmlFile(
   filename,
   content,
@@ -13,6 +16,27 @@ async function processHtmlFile(
   const $ = cheerio.load(content);
   const forms = $('form');
   let formCheck = true;
+
+  $('a[href^="mailto:"]').each((i, el) => {
+    const email = $(el).attr('href').slice(7);
+    emailAddresses.add(email);
+  });
+
+  $('a[href^="tel:"]').each((i, el) => {
+    const phone = $(el).attr('href').slice(4);
+    phoneNumbers.add(phone);
+  });
+
+  $('a[href^="mailto:"]').each((i, el) => {
+    const emailHref = $(el).attr('href').slice(7);
+    const emailText = $(el).text();
+
+    emailAddresses.add(emailHref);
+
+    if (emailHref.toLowerCase() !== emailText.toLowerCase()) {
+      results.push(`Разные емейлы в ${filename}: ${emailText} | ${emailHref}`);
+    }
+  });
 
   forms.each((i, form) => {
     if ($(form).find('input[type="checkbox"]').length === 0) {
@@ -146,6 +170,21 @@ async function checkHtmlFiles(directory) {
     } else if (stat.isDirectory()) {
       await checkHtmlFiles(filePath);
     }
+  }
+
+  if (emailAddresses.size > 1) {
+    results.push(
+      `Обнаружены различные адреса электронной почты: ${Array.from(
+        emailAddresses
+      ).join(', ')}`
+    );
+  }
+  if (phoneNumbers.size > 1) {
+    results.push(
+      `Обнаружены различные номера телефонов: ${Array.from(phoneNumbers).join(
+        ', '
+      )}`
+    );
   }
 
   console.log(
