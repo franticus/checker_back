@@ -68,6 +68,11 @@ async function processHtmlFile(
     descriptions.add(description);
   }
 
+  const h1Tags = $('h1');
+  if (h1Tags.length !== 1) {
+    results.push(`Найдено ${h1Tags.length} тегов h1 в файле: ${filename}`);
+  }
+
   if (filename.endsWith('.html')) {
     const links = $('a');
 
