@@ -74,9 +74,14 @@ async function processHtmlFile(
     for (let i = 0; i < links.length; i++) {
       const link = links[i];
       const href = $(link).attr('href');
+      if (href === '' || href === undefined) {
+        results.push(
+          `Недопустимая ссылка (пустая или отсутствует) обнаружена в файле: ${filename}`
+        );
+        continue;
+      }
       if (href) {
         if (
-          href === '' ||
           href.startsWith('#') ||
           href.endsWith('.html') ||
           href.includes('#')
