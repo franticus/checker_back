@@ -18,22 +18,37 @@ async function processHtmlFile(
   let formCheck = true;
 
   $('a[href^="mailto:"]').each((i, el) => {
-    const email = $(el).attr('href').slice(7);
+    const email = $(el).attr('href').slice(7).toLowerCase();
     emailAddresses.add(email);
   });
 
   $('a[href^="tel:"]').each((i, el) => {
-    const phone = $(el).attr('href').slice(4);
+    const phone = $(el).attr('href').slice(4).toLowerCase();
     phoneNumbers.add(phone);
   });
 
   $('a[href^="mailto:"]').each((i, el) => {
-    const emailHref = $(el).attr('href').slice(7);
-    const emailText = $(el).text();
+    const emailHref = $(el).attr('href').slice(7).toLowerCase();
+
+    const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g;
+    let emailTextMatch = $(el).text().toLowerCase().match(emailRegex);
+    let emailText = emailTextMatch ? emailTextMatch[0].toLowerCase() : '';
+
+    if (!emailTextMatch || !emailTextMatch.includes(emailHref)) {
+      const childEmailsText = $(el)
+        .find('*')
+        .map((i, child) => $(child).text().toLowerCase())
+        .get()
+        .join(' ');
+      let childEmailMatch = childEmailsText.match(emailRegex);
+      emailText = childEmailMatch
+        ? childEmailMatch[0].toLowerCase()
+        : emailText;
+    }
 
     emailAddresses.add(emailHref);
 
-    if (emailHref.toLowerCase() !== emailText.toLowerCase()) {
+    if (emailHref !== emailText) {
       results.push(
         `Разные email адреса в ${filename}: ${emailText} | ${emailHref}`
       );
