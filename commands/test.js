@@ -34,7 +34,9 @@ async function processHtmlFile(
     emailAddresses.add(emailHref);
 
     if (emailHref.toLowerCase() !== emailText.toLowerCase()) {
-      results.push(`Разные емейлы в ${filename}: ${emailText} | ${emailHref}`);
+      results.push(
+        `Разные email адреса в ${filename}: ${emailText} | ${emailHref}`
+      );
     }
   });
 
@@ -174,16 +176,12 @@ async function checkHtmlFiles(directory) {
 
   if (emailAddresses.size > 1) {
     results.push(
-      `Обнаружены различные адреса электронной почты: ${Array.from(
-        emailAddresses
-      ).join(', ')}`
+      `Разные email адреса: ${Array.from(emailAddresses).join(', ')}`
     );
   }
   if (phoneNumbers.size > 1) {
     results.push(
-      `Обнаружены различные номера телефонов: ${Array.from(phoneNumbers).join(
-        ', '
-      )}`
+      `Разные номера телефонов: ${Array.from(phoneNumbers).join(', ')}`
     );
   }
 
