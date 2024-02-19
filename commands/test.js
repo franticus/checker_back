@@ -76,7 +76,7 @@ async function processHtmlFile(
       const href = $(link).attr('href');
       if (href === '' || href === undefined) {
         results.push(
-          `Недопустимая ссылка (пустая или отсутствует) обнаружена в файле: ${filename}`
+          `Недопустимая ссылка (пустая или отсутствует) (${href}) обнаружена в файле: ${filename}`
         );
         continue;
       }
