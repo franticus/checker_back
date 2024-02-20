@@ -97,13 +97,6 @@ async function processHtmlFile(
           results.push(`Отсутствует атрибут name у input в файле: ${filename}`);
         }
       });
-
-    const textareaStyle = $(form).find('textarea').attr('style');
-    if (textareaStyle && !textareaStyle.includes('resize: none')) {
-      results.push(
-        `У textarea отсутствует свойство resize: none в файле: ${filename}`
-      );
-    }
   });
 
   const title = $('title').text();
