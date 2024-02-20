@@ -163,10 +163,14 @@ async function processHtmlFile(
   }
 }
 
-async function checkHtmlFiles(directory) {
+async function checkHtmlFiles(directory, zipFileName = '') {
   const titles = new Set();
   const descriptions = new Set();
   const results = [];
+
+  if (zipFileName) {
+    results.push(`Проверка архива: ${zipFileName}`);
+  }
 
   async function processFile(filename, content) {
     if (filename.endsWith('.html')) {
@@ -211,10 +215,11 @@ async function checkHtmlFiles(directory) {
 async function unpackAndCheckZip(zipFilePath) {
   const zip = new AdmZip(zipFilePath);
   const extractPath = path.join(__dirname, 'temp_extracted');
+  const zipFileName = path.basename(zipFilePath);
 
   zip.extractAllTo(extractPath, true);
 
-  await checkHtmlFiles(extractPath);
+  await checkHtmlFiles(extractPath, zipFileName);
 
   await fs.remove(extractPath);
   await fs.unlink(zipFilePath);
