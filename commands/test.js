@@ -17,6 +17,11 @@ async function processHtmlFile(
   const forms = $('form');
   let formCheck = true;
 
+  $('img[src^="./"], script[src^="./"], link[href^="./"]').each((i, el) => {
+    const srcOrHref = $(el).attr('src') || $(el).attr('href');
+    results.push(`Недопустимый путь ("./"): ${srcOrHref} в файле: ${filename}`);
+  });
+
   $('a[href^="mailto:"]').each((i, el) => {
     const email = $(el).attr('href').slice(7).toLowerCase();
     emailAddresses.add(email);
