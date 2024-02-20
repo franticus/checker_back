@@ -14,7 +14,7 @@ app.post('/upload', (req, res) => {
 
   let uploadedFile = req.files.file;
 
-  uploadedFile.mv(`commands/${uploadedFile.name}`, function (err) {
+  uploadedFile.mv(`uploads/${uploadedFile.name}`, function (err) {
     if (err) {
       return res.status(500).send(err);
     }

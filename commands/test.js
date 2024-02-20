@@ -6,6 +6,8 @@ const AdmZip = require('adm-zip');
 const emailAddresses = new Set();
 const phoneNumbers = new Set();
 
+const uploads = path.join(__dirname, '..', 'uploads');
+
 async function processHtmlFile(
   filename,
   content,
@@ -168,7 +170,7 @@ async function processHtmlFile(
   }
 }
 
-async function checkHtmlFiles(directory, zipFileName = '') {
+async function checkHtmlFiles(uploads, zipFileName = '') {
   const titles = new Set();
   const descriptions = new Set();
   const results = [];
@@ -184,10 +186,10 @@ async function checkHtmlFiles(directory, zipFileName = '') {
   }
 
   const filterHiddenFiles = file => !file.startsWith('.');
-  const files = (await fs.readdir(directory)).filter(filterHiddenFiles);
+  const files = (await fs.readdir(uploads)).filter(filterHiddenFiles);
 
   for (const filename of files) {
-    const filePath = path.join(directory, filename);
+    const filePath = path.join(uploads, filename);
     const stat = await fs.stat(filePath);
 
     if (stat.isFile()) {
@@ -230,15 +232,28 @@ async function unpackAndCheckZip(zipFilePath) {
   await fs.unlink(zipFilePath);
 }
 
-async function processZipFiles(directory) {
-  const files = await fs.readdir(directory);
-  const zipFiles = files.filter(file => path.extname(file) === '.zip');
-
-  for (const zipFile of zipFiles) {
-    const zipFilePath = path.join(directory, zipFile);
-    await unpackAndCheckZip(zipFilePath);
+async function clearUploadsDirectory(directory) {
+  try {
+    const files = await fs.readdir(directory);
+    for (const file of files) {
+      const filePath = path.join(directory, file);
+      await fs.remove(filePath);
+    }
+  } catch (error) {
+    console.error('Ошибка при очистке папки uploads:', error);
   }
 }
 
-const directory = path.join(__dirname);
-processZipFiles(directory);
+async function processZipFiles(uploads) {
+  const files = await fs.readdir(uploads);
+  const zipFiles = files.filter(file => path.extname(file) === '.zip');
+
+  for (const zipFile of zipFiles) {
+    const zipFilePath = path.join(uploads, zipFile);
+    await unpackAndCheckZip(zipFilePath);
+  }
+
+  await clearUploadsDirectory(uploads);
+}
+
+processZipFiles(uploads);
