@@ -30,7 +30,8 @@ async function processHtmlFile(
   });
 
   $('a[href^="tel:"]').each((i, el) => {
-    const phone = $(el).attr('href').slice(4).toLowerCase();
+    const phoneRaw = $(el).attr('href').slice(4).toLowerCase();
+    const phone = phoneRaw.replace(/[^\d]/g, '');
     phoneNumbers.add(phone);
   });
 

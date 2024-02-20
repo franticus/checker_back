@@ -1,6 +1,6 @@
 {
   "name": "checker",
-  "version": "2.8.0",
+  "version": "2.8.1",
   "bin": {
     "test": "node ./commands/test.js"
   },
