@@ -1,0 +1,11 @@
+meta:
+  environment: node
+  toolchain:
+    name: npm
+    version: 20
+build:
+  skip: 'yes'
+  command: npm run start
+run:
+  persistenceMount: /data
+  containerPort: 80
