@@ -7,7 +7,13 @@ const fs = require('fs-extra');
 const app = express();
 const path = require('path');
 
-app.use(cors());
+// app.use(cors());
+app.use(
+  cors({
+    origin: 'https://checkersite.netlify.app/',
+    methods: ['GET', 'POST'],
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(fileUpload());
