@@ -16,6 +16,7 @@
     "cross-env": "^7.0.3",
     "cross-spawn": "^7.0.3",
     "css": "^3.0.0",
+    "encodeurl": "^1.0.2",
     "express": "^4.18.2",
     "express-fileupload": "^1.4.3",
     "fs-extra": "^11.2.0",
