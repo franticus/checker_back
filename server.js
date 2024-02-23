@@ -2,14 +2,41 @@ const express = require('express');
 const fileUpload = require('express-fileupload');
 const spawn = require('cross-spawn');
 const cors = require('cors');
-const fs = require('fs-extra'); // Убедитесь, что fs-extra импортирован
+const { JSDOM } = require('jsdom');
+const fs = require('fs-extra');
 const app = express();
 const path = require('path');
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(fileUpload());
 
 const uploadsDir = path.join(__dirname, 'uploads');
+const statisticsPath = path.join(__dirname, 'statistics.json');
+
+// Функция для обновления статистики
+function updateStatistics(updateCallback) {
+  fs.readJson(statisticsPath, { throws: false })
+    .then(stats => {
+      if (!stats) {
+        stats = {
+          visits: 0,
+          archivesChecked: 0,
+          textsStolen: 0,
+          textsApplied: 0,
+        };
+      }
+      // Вызываем функцию обратного вызова для обновления статистики
+      updateCallback(stats);
+
+      // Сохраняем обновленную статистику обратно в файл
+      fs.writeJson(statisticsPath, stats, { spaces: 2 }).catch(err =>
+        console.error(`Ошибка при сохранении статистики: ${err}`)
+      );
+    })
+    .catch(err => console.error(`Ошибка при чтении статистики: ${err}`));
+}
 
 app.post('/upload', (req, res) => {
   if (!req.files || !req.files.file) {
@@ -29,34 +56,23 @@ app.post('/upload', (req, res) => {
         const results = [];
 
         child.stdout.on('data', data => {
-          const stdout = data.toString().replace(/\n/g, '');
+          const stdout = data.toString().trim();
           console.log(`stdout: ${stdout}`);
-          results.push(stdout);
+          if (stdout) results.push(stdout);
         });
 
         child.stderr.on('data', data => {
-          const stderr = data.toString().replace(/\n/g, '');
+          const stderr = data.toString().trim();
           console.error(`stderr: ${stderr}`);
-          results.push(`Error during file processing: ${stderr}`);
+          if (stderr) results.push(stderr);
         });
 
         child.on('close', () => {
-          if (
-            results.length === 0 ||
-            (results.length === 1 && results[0] === '')
-          ) {
-            return res.status(500).send('No results found.');
-          }
+          updateStatistics(stats => {
+            stats.archivesChecked++;
+          });
 
-          const index = results.findIndex(result =>
-            result.includes('Проверка архива')
-          );
-          if (index > 0) {
-            const [archiveCheck] = results.splice(index, 1);
-            results.unshift(archiveCheck);
-          }
-
-          res.send(results.filter(result => result !== '').join(', '));
+          res.send(results.join('\n'));
         });
       });
     })
@@ -66,8 +82,75 @@ app.post('/upload', (req, res) => {
     });
 });
 
+app.post('/steal', (req, res) => {
+  const bodyContent = req.body.content;
+  const dom = new JSDOM(bodyContent);
+  const texts = {};
+
+  let index = 1;
+  dom.window.document.querySelectorAll('body *').forEach(element => {
+    if (element.textContent.trim() && element.children.length === 0) {
+      texts[`txt${index++}`] = element.textContent.trim();
+    }
+  });
+
+  // Обновляем статистику использования textstealer
+  updateStatistics(stats => {
+    stats.textsStolen++;
+  });
+
+  res.json(texts);
+});
+
+app.post('/apply', (req, res) => {
+  const { htmlContent, replacements } = req.body;
+  const dom = new JSDOM(htmlContent);
+  let index = 1;
+
+  dom.window.document.querySelectorAll('body *').forEach(element => {
+    if (element.textContent.trim() && element.children.length === 0) {
+      const replacementKey = `txt${index}`;
+      if (replacements[replacementKey]) {
+        element.textContent = replacements[replacementKey];
+        index++;
+      }
+    }
+  });
+
+  res.json({ updatedHtml: dom.window.document.body.innerHTML });
+
+  updateStatistics(stats => {
+    stats.textsApplied++;
+  });
+});
+
+app.get('/stats', (req, res) => {
+  fs.readJson(statisticsPath, { throws: false })
+    .then(stats => {
+      if (!stats) {
+        // Если статистика еще не была инициализирована, возвращаем базовый объект
+        stats = {
+          visits: 0,
+          archivesChecked: 0,
+          textsStolen: 0,
+          textsApplied: 0,
+        };
+      }
+      res.json(stats);
+    })
+    .catch(err => {
+      console.error(`Ошибка при чтении файла статистики: ${err}`);
+      res.status(500).send('Ошибка при чтении файла статистики');
+    });
+});
+
 app.listen(3000, async () => {
   console.log('Сервер запущен на порту 3000');
+
+  // Обновляем статистику посещений
+  updateStatistics(stats => {
+    stats.visits++;
+  });
 
   try {
     const open = (await import('open')).default;
