@@ -148,6 +148,10 @@ app.get('/stats', (req, res) => {
       console.error(`Ошибка при чтении файла статистики: ${err}`);
       res.status(500).send('Ошибка при чтении файла статистики');
     });
+
+  updateStatistics(stats => {
+    stats.visits++;
+  });
 });
 
 app.listen(3000, async () => {
