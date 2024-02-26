@@ -3,6 +3,8 @@ const path = require('path');
 const cheerio = require('cheerio');
 const AdmZip = require('adm-zip');
 
+const clearUploadsDirectory = require('../helpers/clearUploadsDirectory.js');
+
 const emailAddresses = new Set();
 const phoneNumbers = new Set();
 
@@ -226,21 +228,16 @@ async function unpackAndCheckZip(zipFilePath) {
   await fs.unlink(zipFilePath);
 }
 
-async function clearUploadsDirectory(directory) {
-  try {
-    const files = await fs.readdir(directory);
-    for (const file of files) {
-      const filePath = path.join(directory, file);
-      await fs.remove(filePath);
-    }
-  } catch (error) {
-    console.error('Ошибка при очистке папки uploads:', error);
-  }
-}
-
 async function processZipFiles(uploads) {
   const files = await fs.readdir(uploads);
-  const zipFiles = files.filter(file => path.extname(file) === '.zip');
+  const zipFiles = files.filter(
+    file => path.extname(file).toLowerCase() === '.zip'
+  );
+
+  if (zipFiles.length === 0) {
+    console.error('Нет ZIP-файлов для обработки');
+    return { error: 'Отправленный файл не является ZIP-архивом' };
+  }
 
   for (const zipFile of zipFiles) {
     const zipFilePath = path.join(uploads, zipFile);
