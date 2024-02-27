@@ -3,25 +3,54 @@ const cors = require('cors');
 const { JSDOM } = require('jsdom');
 const multer = require('multer');
 const { spawn } = require('child_process');
+const axios = require('axios');
 const fs = require('fs-extra');
 const path = require('path');
 const app = express();
+const bodyParser = require('body-parser');
+
+const port = 3000;
 
 const {
   compareWithCheckedArchive,
   unpackAndSavePlainText,
 } = require('./commands/unique.js');
 const clearUploadsDirectory = require('./helpers/clearUploadsDirectory.js');
+const downloadSitePagesAsZip = require('./helpers/uniqueUrl.js');
+
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     const allowedOrigins = [
+//       'https://checkersite.netlify.app',
+//       'https://checker-zip-frantunn.amvera.io',
+//       'https://checker-zip-frantunn.amvera.io/stats',
+//       'https://checker-zip-frantunn.amvera.io/steal',
+//       'https://checker-zip-frantunn.amvera.io/apply',
+//       'https://checker-zip-frantunn.amvera.io/upload',
+//       'https://checker-zip-frantunn.amvera.io/uniquetest',
+//       'https://checker-zip-frantunn.amvera.io/uniquetest_url',
+//       'https://checker-zip-frantunn.amvera.io/cleanuploads',
+//     ];
+//     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('CORS not allowed for this origin'));
+//     }
+//   },
+//   methods: ['GET', 'POST'],
+// };
+
+// app.use(cors(corsOptions));
 
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 
 const uploadsDir = path.join(__dirname, 'uploads');
 const statisticsPath = path.join(__dirname, 'statistics.json');
 const checkedArchiveDir = path.join(__dirname, 'checkedArchive');
 
-// Настройка хранилища для multer
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, uploadsDir);
@@ -33,9 +62,8 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage: storage,
   limits: { fileSize: 20 * 1024 * 1024 },
-}); // Ограничение размера файла
+});
 
-// Функция для обновления статистики
 function updateStatistics(updateCallback) {
   fs.readdir(checkedArchiveDir)
     .then(files => {
@@ -66,7 +94,6 @@ function updateStatistics(updateCallback) {
     );
 }
 
-// Маршруты
 app.post('/upload', upload.single('file'), async (req, res) => {
   if (!req.file) {
     return res.status(400).json({ error: 'No file was uploaded.' });
@@ -122,6 +149,29 @@ app.post('/uniquetest', upload.single('siteZip'), async (req, res) => {
     await clearUploadsDirectory(uploadsDir);
     results.push({ name: 'Internal Server Error', uniquePercentage: null });
     res.send(results);
+  }
+});
+
+app.post('/uniquetest_url', upload.single('siteZip'), async (req, res) => {
+  const { siteUrl } = req.body;
+  if (!siteUrl) {
+    return res
+      .status(400)
+      .json({ message: 'URL сайта обязателен для отправки.' });
+  }
+
+  try {
+    // Использование функции для скачивания страниц сайта и их сохранения в ZIP
+    const zipFilePath = await downloadSitePagesAsZip(siteUrl);
+
+    // Отправка ответа клиенту с информацией о сохранённом файле
+    res.json({
+      message: 'Страницы сайта успешно сохранены в ZIP-архив.',
+      filePath: zipFilePath,
+    });
+  } catch (error) {
+    console.error('Произошла ошибка при обработке запроса:', error);
+    res.status(500).json({ message: 'Внутренняя ошибка сервера.' });
   }
 });
 
@@ -201,6 +251,8 @@ app.post('/cleanuploads', async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log('Сервер запущен на порту 3000');
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+  fs.ensureDirSync(uploadsDir);
+  fs.ensureDirSync(checkedArchiveDir);
 });
