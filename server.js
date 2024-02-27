@@ -114,7 +114,7 @@ app.post('/uniquetest', upload.single('siteZip'), async (req, res) => {
     );
     const comparisonResults = compareWithCheckedArchive(newText);
     comparisonResults.sort((a, b) => a.uniquePercentage - b.uniquePercentage);
-    const jsonFilePath = path.join(__dirname, 'comparisonResults.json');
+    const jsonFilePath = path.join(__dirname, '..', 'comparisonResults.json');
     fs.writeFileSync(jsonFilePath, JSON.stringify(comparisonResults, null, 2));
     res.json(comparisonResults);
   } catch (error) {
@@ -189,6 +189,16 @@ app.get('/stats', (req, res) => {
   updateStatistics(stats => {
     stats.visits++;
   });
+});
+
+app.post('/cleanuploads', async (req, res) => {
+  try {
+    await clearUploadsDirectory(uploadsDir);
+    res.send('Uploads directory has been cleared successfully.');
+  } catch (error) {
+    console.error('Error clearing uploads directory:', error);
+    res.status(500).send('Error clearing uploads directory');
+  }
 });
 
 app.listen(3000, () => {

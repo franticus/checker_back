@@ -55,7 +55,7 @@ function compareWithCheckedArchive(newText) {
   });
 
   // Записываем результаты сравнения в JSON файл в корне проекта
-  const outputFilePath = path.join(__dirname, 'comparisonResults.json');
+  const outputFilePath = path.join(__dirname, '..', 'comparisonResults.json');
   fs.writeFileSync(outputFilePath, JSON.stringify(results, null, 2));
   console.log(`Comparison results saved to ${outputFilePath}`);
 
