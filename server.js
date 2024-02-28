@@ -165,14 +165,18 @@ app.post('/uniquetest_url', async (req, res) => {
     const zipFilePath = await downloadSitePagesAsZip(siteUrl);
     console.log('ZIP-файл создан:', zipFilePath);
 
-    // В этом месте убедитесь, что передаете корректный путь и имя файла.
-    // Если zipFilePath является полным путем к файлу, то originalFileName может быть извлечен из него.
-    const originalFileName = path.basename(zipFilePath); // Извлекаем имя файла из полного пути
-
-    // Теперь передаем оба параметра корректно.
-    const newText = await unpackAndSavePlainText(zipFilePath, originalFileName);
+    // Используем доменное имя для формирования имени JSON-файла
+    const siteDomain = new URL(siteUrl).hostname
+      .replace('www.', '')
+      .split('.')[0];
+    const newText = await unpackAndSavePlainText(
+      zipFilePath,
+      `${siteDomain}.zip`
+    );
     const comparisonResults = compareWithCheckedArchive(newText);
     comparisonResults.sort((a, b) => a.uniquePercentage - b.uniquePercentage);
+
+    // Формирование пути к JSON файлу
     const jsonFilePath = path.join(__dirname, '..', 'comparisonResults.json');
     fs.writeFileSync(jsonFilePath, JSON.stringify(comparisonResults, null, 2));
 

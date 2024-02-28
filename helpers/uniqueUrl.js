@@ -28,11 +28,11 @@ async function downloadSitePagesAsZip(siteUrl) {
 
   await browser.close();
 
-  // Генерация уникального имени для ZIP-файла на основе URL сайта.
-  const siteHostName = new URL(siteUrl).hostname
-    .replace(/[^a-z0-9]/gi, '_')
-    .toLowerCase();
-  const zipName = `${siteHostName}_${Date.now()}.zip`;
+  // Генерация имени для ZIP-файла на основе доменного имени сайта.
+  const siteDomain = new URL(siteUrl).hostname
+    .replace(/^www\./, '')
+    .split('.')[0]; // Удаление www и взятие домена первого уровня
+  const zipName = `${siteDomain}.zip`; // Фиксированное имя файла
   const outputPath = path.join(__dirname, '..', 'uploads', zipName);
 
   // Сохранение ZIP-архива.
