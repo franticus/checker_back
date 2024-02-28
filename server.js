@@ -128,31 +128,32 @@ app.post('/upload', upload.single('file'), async (req, res) => {
 });
 
 app.post('/uniquetest', upload.single('siteZip'), async (req, res) => {
-  const results = [];
-
   if (!req.file) {
     return res.status(400).json({ error: 'No file uploaded.' });
   }
 
+  const filePath = req.file.path;
+  const originalFileName = req.file.originalname;
+
   try {
-    const newText = await unpackAndSavePlainText(
-      req.file.path,
-      req.file.originalname
-    );
+    const newText = await unpackAndSavePlainText(filePath, originalFileName);
     const comparisonResults = compareWithCheckedArchive(newText);
     comparisonResults.sort((a, b) => a.uniquePercentage - b.uniquePercentage);
+
     const jsonFilePath = path.join(__dirname, '..', 'comparisonResults.json');
     fs.writeFileSync(jsonFilePath, JSON.stringify(comparisonResults, null, 2));
+
     res.json(comparisonResults);
   } catch (error) {
     console.error('Error processing the request:', error);
     await clearUploadsDirectory(uploadsDir);
-    results.push({ name: 'Internal Server Error', uniquePercentage: null });
-    res.send(results);
+    res
+      .status(500)
+      .json({ name: 'Internal Server Error', uniquePercentage: null });
   }
 });
 
-app.post('/uniquetest_url', upload.single('siteZip'), async (req, res) => {
+app.post('/uniquetest_url', async (req, res) => {
   const { siteUrl } = req.body;
   if (!siteUrl) {
     return res
@@ -161,14 +162,21 @@ app.post('/uniquetest_url', upload.single('siteZip'), async (req, res) => {
   }
 
   try {
-    // Использование функции для скачивания страниц сайта и их сохранения в ZIP
     const zipFilePath = await downloadSitePagesAsZip(siteUrl);
+    console.log('ZIP-файл создан:', zipFilePath);
 
-    // Отправка ответа клиенту с информацией о сохранённом файле
-    res.json({
-      message: 'Страницы сайта успешно сохранены в ZIP-архив.',
-      filePath: zipFilePath,
-    });
+    // В этом месте убедитесь, что передаете корректный путь и имя файла.
+    // Если zipFilePath является полным путем к файлу, то originalFileName может быть извлечен из него.
+    const originalFileName = path.basename(zipFilePath); // Извлекаем имя файла из полного пути
+
+    // Теперь передаем оба параметра корректно.
+    const newText = await unpackAndSavePlainText(zipFilePath, originalFileName);
+    const comparisonResults = compareWithCheckedArchive(newText);
+    comparisonResults.sort((a, b) => a.uniquePercentage - b.uniquePercentage);
+    const jsonFilePath = path.join(__dirname, '..', 'comparisonResults.json');
+    fs.writeFileSync(jsonFilePath, JSON.stringify(comparisonResults, null, 2));
+
+    res.json({ message: 'Анализ уникальности выполнен.', comparisonResults });
   } catch (error) {
     console.error('Произошла ошибка при обработке запроса:', error);
     res.status(500).json({ message: 'Внутренняя ошибка сервера.' });
