@@ -1,63 +1,67 @@
 [
   {
     "name": "New_v9_ACPro",
-    "uniquePercentage": 98
+    "uniquePercentage": 94
+  },
+  {
+    "name": "New_v9_Designify",
+    "uniquePercentage": 0
   },
   {
     "name": "New_v9_EdiGo",
-    "uniquePercentage": 86
+    "uniquePercentage": 57
   },
   {
     "name": "New_v9_GameLot",
-    "uniquePercentage": 90
-  },
-  {
-    "name": "New_v9_RentDeskSpace",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_Scentopia",
-    "uniquePercentage": 86
-  },
-  {
-    "name": "New_v9_SkillSetSail",
-    "uniquePercentage": 86
-  },
-  {
-    "name": "New_v9_TravelPros",
-    "uniquePercentage": 86
-  },
-  {
-    "name": "New_v9_TreeTove",
-    "uniquePercentage": 85
-  },
-  {
-    "name": "New_v9_TrimTrove",
-    "uniquePercentage": 85
-  },
-  {
-    "name": "New_v9_VR_Development_BRAZIL",
-    "uniquePercentage": 99
-  },
-  {
-    "name": "New_v9_Viralize",
-    "uniquePercentage": 85
-  },
-  {
-    "name": "New_v9_VitaMart",
-    "uniquePercentage": 85
-  },
-  {
-    "name": "New_v9_WebCraft Studios",
     "uniquePercentage": 88
   },
   {
+    "name": "New_v9_RentDeskSpace",
+    "uniquePercentage": 94
+  },
+  {
+    "name": "New_v9_Scentopia",
+    "uniquePercentage": 56
+  },
+  {
+    "name": "New_v9_SkillSetSail",
+    "uniquePercentage": 57
+  },
+  {
+    "name": "New_v9_TravelPros",
+    "uniquePercentage": 65
+  },
+  {
+    "name": "New_v9_TreeTove",
+    "uniquePercentage": 83
+  },
+  {
+    "name": "New_v9_TrimTrove",
+    "uniquePercentage": 83
+  },
+  {
+    "name": "New_v9_VR_Development_BRAZIL",
+    "uniquePercentage": 98
+  },
+  {
+    "name": "New_v9_Viralize",
+    "uniquePercentage": 84
+  },
+  {
+    "name": "New_v9_VitaMart",
+    "uniquePercentage": 53
+  },
+  {
+    "name": "New_v9_WebCraft Studios",
+    "uniquePercentage": 79
+  },
+  {
     "name": "New_v9_tropicalrattanhome",
-    "uniquePercentage": 85
+    "uniquePercentage": 83
   },
   {
     "name": "New_v9_vendings",
-    "uniquePercentage": 85
+    "uniquePercentage": 79
   },
   {
     "name": "checkersite",
@@ -65,7 +69,7 @@
   },
   {
     "name": "lanoguid",
-    "uniquePercentage": 0
+    "uniquePercentage": 86
   },
   {
     "name": "pandicul",
