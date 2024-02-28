@@ -180,7 +180,7 @@ app.post('/uniquetest_url', async (req, res) => {
     const jsonFilePath = path.join(__dirname, '..', 'comparisonResults.json');
     fs.writeFileSync(jsonFilePath, JSON.stringify(comparisonResults, null, 2));
 
-    res.json({ message: 'Анализ уникальности выполнен.', comparisonResults });
+    res.json(comparisonResults);
   } catch (error) {
     console.error('Произошла ошибка при обработке запроса:', error);
     res.status(500).json({ message: 'Внутренняя ошибка сервера.' });

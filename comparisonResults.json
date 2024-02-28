@@ -1,35 +1,39 @@
 [
   {
     "name": "New_v9_ACPro",
-    "uniquePercentage": 99
-  },
-  {
-    "name": "New_v9_EdiGo",
-    "uniquePercentage": 97
-  },
-  {
-    "name": "New_v9_GameLot",
     "uniquePercentage": 98
   },
   {
+    "name": "New_v9_EdiGo",
+    "uniquePercentage": 86
+  },
+  {
+    "name": "New_v9_GameLot",
+    "uniquePercentage": 90
+  },
+  {
     "name": "New_v9_RentDeskSpace",
-    "uniquePercentage": 99
+    "uniquePercentage": 98
   },
   {
     "name": "New_v9_Scentopia",
-    "uniquePercentage": 97
+    "uniquePercentage": 86
+  },
+  {
+    "name": "New_v9_SkillSetSail",
+    "uniquePercentage": 86
   },
   {
     "name": "New_v9_TravelPros",
-    "uniquePercentage": 97
+    "uniquePercentage": 86
   },
   {
     "name": "New_v9_TreeTove",
-    "uniquePercentage": 97
+    "uniquePercentage": 85
   },
   {
     "name": "New_v9_TrimTrove",
-    "uniquePercentage": 96
+    "uniquePercentage": 85
   },
   {
     "name": "New_v9_VR_Development_BRAZIL",
@@ -37,22 +41,34 @@
   },
   {
     "name": "New_v9_Viralize",
-    "uniquePercentage": 97
+    "uniquePercentage": 85
   },
   {
     "name": "New_v9_VitaMart",
-    "uniquePercentage": 97
+    "uniquePercentage": 85
   },
   {
     "name": "New_v9_WebCraft Studios",
-    "uniquePercentage": 97
+    "uniquePercentage": 88
   },
   {
     "name": "New_v9_tropicalrattanhome",
-    "uniquePercentage": 95
+    "uniquePercentage": 85
   },
   {
     "name": "New_v9_vendings",
-    "uniquePercentage": 97
+    "uniquePercentage": 85
+  },
+  {
+    "name": "checkersite",
+    "uniquePercentage": 98
+  },
+  {
+    "name": "lanoguid",
+    "uniquePercentage": 0
+  },
+  {
+    "name": "pandicul",
+    "uniquePercentage": 99
   }
 ]
