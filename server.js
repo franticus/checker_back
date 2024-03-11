@@ -53,6 +53,7 @@ const statisticsPath = path.join(__dirname, 'statistics.json');
 const checkedArchiveDir = path.join(__dirname, 'checkedArchive');
 const textHandlers = require('./commands/textManipulationHandlers');
 const statsHandler = require('./commands/statsHandler');
+const cleanUploadsHandler = require('./commands/cleanUploadsHandler');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -110,15 +111,7 @@ app.post('/apply', textHandlers.apply);
 
 app.get('/stats', statsHandler);
 
-app.post('/cleanuploads', async (req, res) => {
-  try {
-    await clearUploadsDirectory(uploadsDir);
-    res.send('Uploads directory has been cleared successfully.');
-  } catch (error) {
-    console.error('Error clearing uploads directory:', error);
-    res.status(500).send('Error clearing uploads directory');
-  }
-});
+app.post('/cleanuploads', cleanUploadsHandler);
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
