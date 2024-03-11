@@ -16,7 +16,6 @@ const {
   unpackAndSavePlainText,
 } = require('./commands/unique.js');
 const clearUploadsDirectory = require('./helpers/clearUploadsDirectory.js');
-const downloadSitePagesAsZip = require('./helpers/uniqueUrl.js');
 
 // const corsOptions = {
 //   origin: function (origin, callback) {
@@ -150,40 +149,6 @@ app.post('/uniquetest', upload.single('siteZip'), async (req, res) => {
     res
       .status(500)
       .json({ name: 'Internal Server Error', uniquePercentage: null });
-  }
-});
-
-app.post('/uniquetest_url', async (req, res) => {
-  const { siteUrl } = req.body;
-  if (!siteUrl) {
-    return res
-      .status(400)
-      .json({ message: 'URL сайта обязателен для отправки.' });
-  }
-
-  try {
-    const zipFilePath = await downloadSitePagesAsZip(siteUrl);
-    console.log('ZIP-файл создан:', zipFilePath);
-
-    // Используем доменное имя для формирования имени JSON-файла
-    const siteDomain = new URL(siteUrl).hostname
-      .replace('www.', '')
-      .split('.')[0];
-    const newText = await unpackAndSavePlainText(
-      zipFilePath,
-      `${siteDomain}.zip`
-    );
-    const comparisonResults = compareWithCheckedArchive(newText);
-    comparisonResults.sort((a, b) => a.uniquePercentage - b.uniquePercentage);
-
-    // Формирование пути к JSON файлу
-    const jsonFilePath = path.join(__dirname, '..', 'comparisonResults.json');
-    fs.writeFileSync(jsonFilePath, JSON.stringify(comparisonResults, null, 2));
-
-    res.json(comparisonResults);
-  } catch (error) {
-    console.error('Произошла ошибка при обработке запроса:', error);
-    res.status(500).json({ message: 'Внутренняя ошибка сервера.' });
   }
 });
 
