@@ -14,6 +14,7 @@ const textHandlers = require('./commands/textManipulationHandlers');
 const statsHandler = require('./commands/statsHandler');
 const updateStatistics = require('./helpers/updateStatistics');
 const cleanUploadsHandler = require('./commands/cleanUploadsHandler');
+const cleanNonNewFilesHandler = require('./commands/cleanNonNewFilesHandler');
 
 const port = 3000;
 
@@ -76,6 +77,8 @@ app.post('/apply', textHandlers.apply);
 app.get('/stats', statsHandler);
 
 app.post('/cleanuploads', cleanUploadsHandler);
+
+app.post('/cleanNonNewFiles', cleanNonNewFilesHandler);
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
