@@ -52,6 +52,7 @@ const uploadsDir = path.join(__dirname, 'uploads');
 const statisticsPath = path.join(__dirname, 'statistics.json');
 const checkedArchiveDir = path.join(__dirname, 'checkedArchive');
 const textHandlers = require('./commands/textManipulationHandlers');
+const statsHandler = require('./commands/statsHandler');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -107,29 +108,7 @@ app.post('/uniquetest', upload.single('siteZip'), (req, res) => {
 app.post('/steal', textHandlers.steal);
 app.post('/apply', textHandlers.apply);
 
-app.get('/stats', (req, res) => {
-  fs.readJson(statisticsPath, { throws: false })
-    .then(stats => {
-      if (!stats) {
-        stats = {
-          visits: 0,
-          archivesDatabase: 0,
-          archivesChecked: 0,
-          textsStolen: 0,
-          textsApplied: 0,
-        };
-      }
-      res.json(stats);
-    })
-    .catch(err => {
-      console.error(`Ошибка при чтении файла статистики: ${err}`);
-      res.status(500).send('Ошибка при чтении файла статистики');
-    });
-
-  updateStatistics(stats => {
-    stats.visits++;
-  });
-});
+app.get('/stats', statsHandler);
 
 app.post('/cleanuploads', async (req, res) => {
   try {
