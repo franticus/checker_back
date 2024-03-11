@@ -51,6 +51,7 @@ app.use(express.urlencoded({ extended: true }));
 const uploadsDir = path.join(__dirname, 'uploads');
 const statisticsPath = path.join(__dirname, 'statistics.json');
 const checkedArchiveDir = path.join(__dirname, 'checkedArchive');
+const textHandlers = require('./commands/textManipulationHandlers');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -103,47 +104,8 @@ app.post('/uniquetest', upload.single('siteZip'), (req, res) => {
   uniqueTestHandler(req, res, uploadsDir);
 });
 
-app.post('/steal', (req, res) => {
-  const bodyContent = req.body.content;
-  const dom = new JSDOM(bodyContent);
-  const texts = {};
-
-  let index = 1;
-  dom.window.document.querySelectorAll('body *').forEach(element => {
-    if (element.textContent.trim() && element.children.length === 0) {
-      texts[`txt${index++}`] = element.textContent.trim();
-    }
-  });
-
-  // Обновляем статистику использования textstealer
-  updateStatistics(stats => {
-    stats.textsStolen++;
-  });
-
-  res.json(texts);
-});
-
-app.post('/apply', (req, res) => {
-  const { htmlContent, replacements } = req.body;
-  const dom = new JSDOM(htmlContent);
-  let index = 1;
-
-  dom.window.document.querySelectorAll('body *').forEach(element => {
-    if (element.textContent.trim() && element.children.length === 0) {
-      const replacementKey = `txt${index}`;
-      if (replacements[replacementKey]) {
-        element.textContent = replacements[replacementKey];
-        index++;
-      }
-    }
-  });
-
-  res.json({ updatedHtml: dom.window.document.body.innerHTML });
-
-  updateStatistics(stats => {
-    stats.textsApplied++;
-  });
-});
+app.post('/steal', textHandlers.steal);
+app.post('/apply', textHandlers.apply);
 
 app.get('/stats', (req, res) => {
   fs.readJson(statisticsPath, { throws: false })
