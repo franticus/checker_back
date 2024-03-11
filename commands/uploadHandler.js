@@ -1,5 +1,6 @@
 const fs = require('fs-extra');
 const { spawn } = require('child_process');
+
 const clearUploadsDirectory = require('../helpers/clearUploadsDirectory.js');
 
 async function uploadFile(req, res, updateStatistics, uploadsDir) {
