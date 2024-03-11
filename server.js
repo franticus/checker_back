@@ -8,16 +8,13 @@ const path = require('path');
 const app = express();
 const bodyParser = require('body-parser');
 
-const port = 3000;
-
-const {
-  compareWithCheckedArchive,
-  unpackAndSavePlainText,
-} = require('./commands/unique.js');
-const clearUploadsDirectory = require('./helpers/clearUploadsDirectory.js');
-
 const uploadHandler = require('./commands/uploadHandler');
 const uniqueTestHandler = require('./commands/uniquetestHandler');
+const textHandlers = require('./commands/textManipulationHandlers');
+const statsHandler = require('./commands/statsHandler');
+const cleanUploadsHandler = require('./commands/cleanUploadsHandler');
+
+const port = 3000;
 
 // const corsOptions = {
 //   origin: function (origin, callback) {
@@ -51,9 +48,6 @@ app.use(express.urlencoded({ extended: true }));
 const uploadsDir = path.join(__dirname, 'uploads');
 const statisticsPath = path.join(__dirname, 'statistics.json');
 const checkedArchiveDir = path.join(__dirname, 'checkedArchive');
-const textHandlers = require('./commands/textManipulationHandlers');
-const statsHandler = require('./commands/statsHandler');
-const cleanUploadsHandler = require('./commands/cleanUploadsHandler');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
