@@ -3,7 +3,6 @@ const cors = require('cors');
 const { JSDOM } = require('jsdom');
 const multer = require('multer');
 const { spawn } = require('child_process');
-const axios = require('axios');
 const fs = require('fs-extra');
 const path = require('path');
 const app = express();
@@ -16,6 +15,9 @@ const {
   unpackAndSavePlainText,
 } = require('./commands/unique.js');
 const clearUploadsDirectory = require('./helpers/clearUploadsDirectory.js');
+
+const uploadHandler = require('./commands/uploadHandler');
+const uniqueTestHandler = require('./commands/uniquetestHandler');
 
 // const corsOptions = {
 //   origin: function (origin, callback) {
@@ -93,63 +95,12 @@ function updateStatistics(updateCallback) {
     );
 }
 
-app.post('/upload', upload.single('file'), async (req, res) => {
-  if (!req.file) {
-    return res.status(400).json({ error: 'No file was uploaded.' });
-  }
-
-  const uploadedFile = req.file;
-
-  const child = spawn('node', ['commands/test.js', uploadedFile.path]);
-  const results = [];
-
-  child.stdout.on('data', data => {
-    const stdout = data.toString().trim();
-    console.log(`stdout: ${stdout}`);
-    if (stdout) results.push(stdout);
-  });
-
-  child.stderr.on('data', data => {
-    const stderr = data.toString().trim();
-    console.error(`stderr: ${stderr}`);
-    if (stderr) results.push(stderr);
-  });
-
-  child.on('close', async code => {
-    updateStatistics(stats => {
-      stats.archivesChecked++;
-    });
-    console.log(`Child process exited with code ${code}`);
-
-    await clearUploadsDirectory(uploadsDir);
-    res.send(results.join('\n'));
-  });
+app.post('/upload', upload.single('file'), (req, res) => {
+  uploadHandler(req, res, updateStatistics, uploadsDir);
 });
 
-app.post('/uniquetest', upload.single('siteZip'), async (req, res) => {
-  if (!req.file) {
-    return res.status(400).json({ error: 'No file uploaded.' });
-  }
-
-  const filePath = req.file.path;
-  const originalFileName = req.file.originalname;
-
-  try {
-    const newText = await unpackAndSavePlainText(filePath, originalFileName);
-    const comparisonResults = compareWithCheckedArchive(newText);
-    comparisonResults.sort((a, b) => a.uniquePercentage - b.uniquePercentage);
-
-    const jsonFilePath = path.join(__dirname, '..', 'comparisonResults.json');
-    fs.writeFileSync(jsonFilePath, JSON.stringify(comparisonResults, null, 2));
-
-    res.json(comparisonResults);
-  } catch (error) {
-    console.error('Error processing the request:', error);
-    await clearUploadsDirectory(uploadsDir);
-    res
-      .status(500)
-      .json({ name: 'Internal Server Error', uniquePercentage: null });
-  }
+app.post('/uniquetest', upload.single('siteZip'), (req, res) => {
+  uniqueTestHandler(req, res, uploadsDir);
 });
 
 app.post('/steal', (req, res) => {
