@@ -6,7 +6,7 @@ const checkHtmlFiles = require('./checkHtmlFiles');
 async function unpackAndCheckZip(zipFilePath) {
   const zip = new AdmZip(zipFilePath);
   const zipEntries = zip.getEntries();
-  const extractPath = path.join(__dirname, 'temp_extracted');
+  const extractPath = path.join(__dirname, '..', 'temp_extracted');
   const zipFileName = path.basename(zipFilePath);
 
   let allFilesInOneFolder = true;
