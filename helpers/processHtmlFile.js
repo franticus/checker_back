@@ -18,6 +18,16 @@ async function processHtmlFile(
     results.push(`Недопустимый путь ("./"): ${srcOrHref} в файле: ${filename}`);
   });
 
+  $('img').each((i, el) => {
+    const altText = $(el).attr('alt');
+    const imgSrc = $(el).attr('src') || 'неизвестный источник';
+    if (typeof altText === 'undefined') {
+      results.push(
+        `Отсутствует атрибут alt у изображения "${imgSrc}" в файле: ${filename}`
+      );
+    }
+  });
+
   $('a[href^="mailto:"]').each((i, el) => {
     const email = $(el).attr('href').slice(7).toLowerCase();
     emailAddresses.add(email);
