@@ -9,13 +9,17 @@ async function uploadFile(req, res, updateStatistics, uploadsDir) {
   }
 
   const uploadedFile = req.file;
+  const results = [`Проверка архива: ${uploadedFile.originalname}`];
+
   const child = spawn('node', ['commands/test.js', uploadedFile.path]);
-  const results = [];
 
   child.stdout.on('data', data => {
     const stdout = data.toString().trim();
     console.log(`stdout: ${stdout}`);
-    if (stdout) results.push(stdout);
+    const messages = stdout.split('\n').map(msg => msg.trim());
+    messages.forEach(msg => {
+      if (msg) results.push(msg);
+    });
   });
 
   child.stderr.on('data', data => {
@@ -31,7 +35,12 @@ async function uploadFile(req, res, updateStatistics, uploadsDir) {
     console.log(`Child process exited with code ${code}`);
 
     await clearUploadsDirectory(uploadsDir);
-    res.send(results.join('\n'));
+
+    if (results.length <= 1) {
+      results.push('Сканирование завершено, проблем не найдено');
+    }
+
+    res.send(results.join('|||'));
   });
 }
 

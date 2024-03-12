@@ -11,10 +11,6 @@ async function checkHtmlFiles(uploads, zipFileName = '') {
   const descriptions = new Set();
   const results = [];
 
-  if (zipFileName) {
-    results.push(`Проверка архива: ${zipFileName}`);
-  }
-
   async function processFile(filename, content) {
     if (filename.endsWith('.html')) {
       await processHtmlFile(filename, content, results, titles, descriptions);
@@ -51,7 +47,7 @@ async function checkHtmlFiles(uploads, zipFileName = '') {
     results
       .map(result => result.trim())
       .filter(result => result !== '')
-      .join(', ')
+      .join('||| ')
   );
 }
 
