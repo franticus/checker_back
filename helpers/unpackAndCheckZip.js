@@ -5,11 +5,38 @@ const checkHtmlFiles = require('./checkHtmlFiles');
 
 async function unpackAndCheckZip(zipFilePath) {
   const zip = new AdmZip(zipFilePath);
+  const zipEntries = zip.getEntries();
   const extractPath = path.join(__dirname, 'temp_extracted');
   const zipFileName = path.basename(zipFilePath);
 
-  zip.extractAllTo(extractPath, true);
+  let allFilesInOneFolder = true;
+  let filesAtRoot = false;
 
+  zipEntries.forEach(entry => {
+    const entryPathSegments = entry.entryName
+      .split('/')
+      .filter(segment => segment.trim().length > 0);
+
+    if (!entry.isDirectory && entryPathSegments.length === 1) {
+      filesAtRoot = true;
+    }
+
+    if (
+      entryPathSegments.length > 2 ||
+      (entryPathSegments.length === 1 && !entry.isDirectory)
+    ) {
+      allFilesInOneFolder = false;
+    }
+  });
+
+  if (!filesAtRoot || allFilesInOneFolder) {
+    console.error(
+      'Архив не должен содержать папку. Пожалуйста, упакуйте файлы непосредственно в корень архива.'
+    );
+    return;
+  }
+
+  zip.extractAllTo(extractPath, true);
   await checkHtmlFiles(extractPath, zipFileName);
 
   await fs.remove(extractPath);
