@@ -15,29 +15,86 @@ async function processHtmlFile(
   const $ = cheerio.load(content);
   const forms = $('form');
   let formCheck = true;
+  let checkPromises = [];
 
-  let imageExistencePromises = [];
+  $('a').each((i, el) => {
+    const href = $(el).attr('href');
+    if (
+      !href ||
+      href.startsWith('#') ||
+      href.startsWith('mailto:') ||
+      href.startsWith('tel:') ||
+      href.startsWith('http://') ||
+      href.startsWith('https://')
+    )
+      return;
 
-  $('img').each((i, el) => {
-    const imgSrc = $(el).attr('src');
-    if (imgSrc) {
-      const imgPath = path.join(extractPath, imgSrc);
-      imageExistencePromises.push(
-        fs
-          .access(imgPath)
-          .then(() => null)
-          .catch(
-            () =>
-              `Несуществующий файл изображения "${imgSrc}" в файле: ${filename}`
-          )
-      );
-    }
+    const checkLink = async () => {
+      if (href.includes('.html#')) {
+        const [page, anchor] = href.split('#');
+        const pagePath = path.join(extractPath, page);
+        try {
+          const pageContent = await fs.readFile(pagePath, 'utf-8');
+          const $page = cheerio.load(pageContent);
+          const idExists = $page(`#${anchor}`).length > 0;
+          if (!idExists) {
+            return `Якорь "#${anchor}" не найден на странице "${page}" в документе: ${filename}`;
+          }
+        } catch (err) {
+          return `Ссылка на несуществующую страницу "${page}" или ошибка при проверке якоря "#${anchor}" в документе: ${filename}`;
+        }
+      } else if (href.endsWith('.html')) {
+        const pagePath = path.join(extractPath, href);
+        try {
+          await fs.access(pagePath);
+        } catch (err) {
+          return `Ссылка на несуществующую страницу "${href}" в документе: ${filename}`;
+        }
+      }
+    };
+    checkPromises.push(checkLink());
   });
 
-  const imageErrors = await Promise.all(imageExistencePromises);
-  imageErrors
-    .filter(error => error !== null)
-    .forEach(error => results.push(error));
+  $('img').each((i, el) => {
+    const src = $(el).attr('src');
+    if (!src) return;
+
+    const checkImage = async () => {
+      const imgPath = path.join(extractPath, src);
+      try {
+        await fs.access(imgPath);
+      } catch (err) {
+        return `Изображение "${src}" не найдено в файле: ${filename}`;
+      }
+    };
+    checkPromises.push(checkImage());
+  });
+
+  const errors = await Promise.all(checkPromises);
+  errors.filter(e => e).forEach(error => results.push(error));
+
+  // let imageExistencePromises = [];
+
+  // $('img').each((i, el) => {
+  //   const imgSrc = $(el).attr('src');
+  //   if (imgSrc) {
+  //     const imgPath = path.join(extractPath, imgSrc);
+  //     imageExistencePromises.push(
+  //       fs
+  //         .access(imgPath)
+  //         .then(() => null)
+  //         .catch(
+  //           () =>
+  //             `Несуществующий файл изображения "${imgSrc}" в файле: ${filename}`
+  //         )
+  //     );
+  //   }
+  // });
+
+  // const imageErrors = await Promise.all(imageExistencePromises);
+  // imageErrors
+  //   .filter(error => error !== null)
+  //   .forEach(error => results.push(error));
 
   $('img[src^="./"], script[src^="./"], link[href^="./"]').each((i, el) => {
     const srcOrHref = $(el).attr('src') || $(el).attr('href');
@@ -177,21 +234,21 @@ async function processHtmlFile(
     }
   }
 
-  if (filename.endsWith('.html')) {
-    const links = $('a[href^="#"]');
-    links.each((i, link) => {
-      const href = $(link).attr('href');
-      if (href.length > 1) {
-        const anchorId = href.substring(1);
-        const target = $(`#${anchorId}`);
-        if (target.length === 0) {
-          results.push(
-            `Отсутствует якорь для ссылки ${href} в файле: ${filename}`
-          );
-        }
-      }
-    });
-  }
+  // if (filename.endsWith('.html')) {
+  //   const links = $('a[href^="#"]');
+  //   links.each((i, link) => {
+  //     const href = $(link).attr('href');
+  //     if (href.length > 1) {
+  //       const anchorId = href.substring(1);
+  //       const target = $(`#${anchorId}`);
+  //       if (target.length === 0) {
+  //         results.push(
+  //           `Отсутствует якорь для ссылки ${href} в файле: ${filename}`
+  //         );
+  //       }
+  //     }
+  //   });
+  // }
 }
 
 module.exports = {
