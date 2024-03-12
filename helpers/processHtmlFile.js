@@ -1,17 +1,43 @@
 const cheerio = require('cheerio');
 const emailAddresses = new Set();
 const phoneNumbers = new Set();
+const fs = require('fs-extra');
+const path = require('path');
 
 async function processHtmlFile(
   filename,
   content,
   results,
   titles,
-  descriptions
+  descriptions,
+  extractPath
 ) {
   const $ = cheerio.load(content);
   const forms = $('form');
   let formCheck = true;
+
+  let imageExistencePromises = [];
+
+  $('img').each((i, el) => {
+    const imgSrc = $(el).attr('src');
+    if (imgSrc) {
+      const imgPath = path.join(extractPath, imgSrc);
+      imageExistencePromises.push(
+        fs
+          .access(imgPath)
+          .then(() => null)
+          .catch(
+            () =>
+              `Несуществующий файл изображения "${imgSrc}" в файле: ${filename}`
+          )
+      );
+    }
+  });
+
+  const imageErrors = await Promise.all(imageExistencePromises);
+  imageErrors
+    .filter(error => error !== null)
+    .forEach(error => results.push(error));
 
   $('img[src^="./"], script[src^="./"], link[href^="./"]').each((i, el) => {
     const srcOrHref = $(el).attr('src') || $(el).attr('href');

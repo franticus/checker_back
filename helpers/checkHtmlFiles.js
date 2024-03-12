@@ -6,6 +6,8 @@ const {
   phoneNumbers,
 } = require('./processHtmlFile');
 
+const tempExtractedDir = path.join(__dirname, '..', 'temp_extracted');
+
 async function checkHtmlFiles(uploads, zipFileName = '') {
   const titles = new Set();
   const descriptions = new Set();
@@ -13,7 +15,14 @@ async function checkHtmlFiles(uploads, zipFileName = '') {
 
   async function processFile(filename, content) {
     if (filename.endsWith('.html')) {
-      await processHtmlFile(filename, content, results, titles, descriptions);
+      await processHtmlFile(
+        filename,
+        content,
+        results,
+        titles,
+        descriptions,
+        tempExtractedDir
+      );
     }
   }
 
