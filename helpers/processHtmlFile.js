@@ -15,7 +15,6 @@ async function processHtmlFile(
 ) {
   const $ = cheerio.load(content);
   const checkPromises = [];
-  //РАЗМЕР АРХИВА
 
   // Проверка внешних ссылок, исключая допустимые ссылки на Google Maps
   $('a').each((i, el) => {

@@ -9,7 +9,18 @@ async function uploadFile(req, res, updateStatistics, uploadsDir) {
   }
 
   const uploadedFile = req.file;
+
   const results = [`Проверка архива: ${uploadedFile.originalname}`];
+
+  // Проверка на максимальный размер файла (10 МБ)
+  const maxFileSize = 10 * 1024 * 1024; // 10 МБ в байтах
+  const fileSizeInMB = (uploadedFile.size / 1024 / 1024).toFixed(1);
+
+  if (uploadedFile.size > maxFileSize) {
+    results.push(
+      `Большой размер архива: ${fileSizeInMB} MB, возможно не пережаты картинки.`
+    );
+  }
 
   const child = spawn('node', ['commands/test.js', uploadedFile.path]);
 
