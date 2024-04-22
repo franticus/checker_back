@@ -62,7 +62,10 @@ async function processHtmlFile(
   // Дополнительные проверки для favicon
   $('link[rel="icon"]').each((i, elem) => {
     const href = $(elem).attr('href');
-    const faviconPath = path.resolve(extractPath, href);
+    const faviconPath = path.resolve(
+      extractPath,
+      href.startsWith('/') ? href.slice(1) : href
+    );
 
     if (!fs.existsSync(faviconPath)) {
       results.push(`Отсутствует файл favicon: ${href} в файле ${filename}`);
@@ -95,14 +98,38 @@ async function processHtmlFile(
     }
   });
 
-  // Проверка заголовков и мета-тегов
-  const title = $('title').text();
-  const description = $('meta[name="description"]').attr('content');
-  if (titles.has(title) || descriptions.has(description)) {
-    results.push(`Дублированные мета теги найдены в файле: ${filename}`);
+  // Проверка наличия тега <main>
+  const mainExists = $('main').length > 0;
+  if (!mainExists) {
+    results.push(`Отсутствует тег <main> в файле: ${filename}`);
+  }
+
+  // Проверка наличия тега <title> и мета-тега <meta name="description">
+  const title = $('title').text().trim();
+  const description = $('meta[name="description"]').attr('content')?.trim();
+
+  if (!title) {
+    results.push(`Отсутствует тег <title> или он пуст в файле: ${filename}`);
   } else {
-    titles.add(title);
-    descriptions.add(description);
+    if (titles.has(title)) {
+      results.push(`Дублированный тег <title> найден в файле: ${filename}`);
+    } else {
+      titles.add(title);
+    }
+  }
+
+  if (!description) {
+    results.push(
+      `Отсутствует мета-тег <meta name="description"> или он пуст в файле: ${filename}`
+    );
+  } else {
+    if (descriptions.has(description)) {
+      results.push(
+        `Дублированный мета-тег <meta name="description"> найден в файле: ${filename}`
+      );
+    } else {
+      descriptions.add(description);
+    }
   }
 
   // Проверка количества тегов h1
