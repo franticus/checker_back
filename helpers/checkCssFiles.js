@@ -50,7 +50,7 @@ async function analyzeCss(filePath, cssContent, baseDirectory) {
     });
 
   if (errors.length > 0) {
-    errors.forEach(error => console.error(error));
+    console.error(errors.join('||| '));
   }
 }
 

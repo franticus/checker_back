@@ -15,8 +15,9 @@ async function processHtmlFile(
 ) {
   const $ = cheerio.load(content);
   const checkPromises = [];
+  //РАЗМЕР АРХИВА
 
-  // Проверка ссылок
+  // Проверка внешних ссылок, исключая допустимые ссылки на Google Maps
   $('a').each((i, el) => {
     const href = $(el).attr('href');
     if (!href) return;
@@ -32,6 +33,14 @@ async function processHtmlFile(
     } else if (href.endsWith('.html')) {
       const pagePath = path.join(extractPath, href);
       checkPromises.push(checkPageExists(pagePath, filename));
+    } else if (
+      (href.startsWith('http://') || href.startsWith('https://')) &&
+      !href.includes('google.com/maps') &&
+      !href.startsWith('https://maps.app.goo.gl')
+    ) {
+      results.push(
+        `Недопустимая внешняя ссылка: ${href} в документе: ${filename}`
+      );
     }
   });
 
