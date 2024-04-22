@@ -60,6 +60,16 @@ async function processHtmlFile(
   const errors = await Promise.all(checkPromises);
   errors.filter(e => e).forEach(error => results.push(error));
 
+  // Дополнительные проверки для favicon
+  $('link[rel="icon"]').each((i, elem) => {
+    const href = $(elem).attr('href');
+    const faviconPath = path.resolve(extractPath, href);
+
+    if (!fs.existsSync(faviconPath)) {
+      results.push(`Отсутствует файл favicon: ${href} в файле ${filename}`);
+    }
+  });
+
   // Дополнительные проверки для изображений
   $('img').each((i, el) => {
     const src = $(el).attr('src');
