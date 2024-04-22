@@ -2,6 +2,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const AdmZip = require('adm-zip');
 const checkHtmlFiles = require('./checkHtmlFiles');
+const checkCssFiles = require('./checkCssFiles');
 
 async function unpackAndCheckZip(zipFilePath) {
   const zip = new AdmZip(zipFilePath);
@@ -38,6 +39,7 @@ async function unpackAndCheckZip(zipFilePath) {
 
   zip.extractAllTo(extractPath, true);
   await checkHtmlFiles(extractPath, zipFileName);
+  await checkCssFiles(extractPath, zipFileName);
 
   await fs.remove(extractPath);
   await fs.unlink(zipFilePath);
