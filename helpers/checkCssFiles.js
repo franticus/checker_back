@@ -30,23 +30,26 @@ async function analyzeCss(filePath, cssContent, baseDirectory) {
     urlPlugin({
       url: (asset, dir) => {
         let url = asset.url;
-        if (!url.startsWith('http') && !url.startsWith('https')) {
-          const fullPath = path.resolve(dir.to, url);
-          if (!fs.existsSync(fullPath)) {
-            errors.push(`Недопустимая ссылка на файл: ${url} в ${filePath}`);
-          }
+        if (url.startsWith('http') || url.startsWith('https')) {
+          errors.push(`Недопустимая внешняя ссылка: ${url}`);
+          return url;
         }
+
+        const fullPath = path.resolve(dir.to, url);
+        if (!fs.existsSync(fullPath)) {
+          errors.push(`Недопустимая ссылка на файл: ${url} в css`);
+        }
+
         return url;
       },
     }),
   ])
     .process(cssContent, { from: filePath })
     .catch(error => {
-      console.error(`Ошибка при обработке CSS в файле ${filePath}:`, error);
+      errors.push(`Ошибка при обработке CSS: ${error.toString()}`);
     });
 
   if (errors.length > 0) {
-    console.error(`Ошибки в файле ${filePath}:`);
     errors.forEach(error => console.error(error));
   }
 }

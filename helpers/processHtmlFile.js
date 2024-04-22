@@ -1,8 +1,9 @@
 const cheerio = require('cheerio');
-const emailAddresses = new Set();
-const phoneNumbers = new Set();
 const fs = require('fs-extra');
 const path = require('path');
+
+const emailAddresses = new Set();
+const phoneNumbers = new Set();
 
 async function processHtmlFile(
   filename,
@@ -13,150 +14,55 @@ async function processHtmlFile(
   extractPath
 ) {
   const $ = cheerio.load(content);
-  const forms = $('form');
-  let formCheck = true;
-  let checkPromises = [];
+  const checkPromises = [];
 
+  // Проверка ссылок
   $('a').each((i, el) => {
     const href = $(el).attr('href');
-    if (
-      !href ||
-      href.startsWith('#') ||
-      href.startsWith('mailto:') ||
-      href.startsWith('tel:') ||
-      href.startsWith('http://') ||
-      href.startsWith('https://')
-    )
-      return;
+    if (!href) return;
 
-    const checkLink = async () => {
-      if (href.includes('.html#')) {
-        const [page, anchor] = href.split('#');
-        const pagePath = path.join(extractPath, page);
-        try {
-          const pageContent = await fs.readFile(pagePath, 'utf-8');
-          const $page = cheerio.load(pageContent);
-          const idExists = $page(`#${anchor}`).length > 0;
-          if (!idExists) {
-            return `Якорь "#${anchor}" не найден на странице "${page}" в документе: ${filename}`;
-          }
-        } catch (err) {
-          return `Ссылка на несуществующую страницу "${page}" или ошибка при проверке якоря "#${anchor}" в документе: ${filename}`;
-        }
-      } else if (href.endsWith('.html')) {
-        const pagePath = path.join(extractPath, href);
-        try {
-          await fs.access(pagePath);
-        } catch (err) {
-          return `Ссылка на несуществующую страницу "${href}" в документе: ${filename}`;
-        }
+    if (href.startsWith('#')) {
+      if (href.length > 1 && !$(href).length) {
+        results.push(`Якорь "${href}" не найден в документе: ${filename}`);
       }
-    };
-    checkPromises.push(checkLink());
+    } else if (href.includes('.html#')) {
+      const [page, anchor] = href.split('#');
+      const pagePath = path.join(extractPath, page);
+      checkPromises.push(checkAnchor(pagePath, anchor, filename));
+    } else if (href.endsWith('.html')) {
+      const pagePath = path.join(extractPath, href);
+      checkPromises.push(checkPageExists(pagePath, filename));
+    }
   });
 
+  // Проверка изображений
   $('img').each((i, el) => {
     const src = $(el).attr('src');
     if (!src) return;
-
-    const checkImage = async () => {
-      const imgPath = path.join(extractPath, src);
-      try {
-        await fs.access(imgPath);
-      } catch (err) {
-        return `Изображение "${src}" не найдено в файле: ${filename}`;
-      }
-    };
-    checkPromises.push(checkImage());
+    const imgPath = path.join(extractPath, src);
+    checkPromises.push(
+      checkFileExists(
+        imgPath,
+        `Изображение "${src}" не найдено в файле: ${filename}`
+      )
+    );
   });
 
   const errors = await Promise.all(checkPromises);
   errors.filter(e => e).forEach(error => results.push(error));
 
-  // let imageExistencePromises = [];
-
-  // $('img').each((i, el) => {
-  //   const imgSrc = $(el).attr('src');
-  //   if (imgSrc) {
-  //     const imgPath = path.join(extractPath, imgSrc);
-  //     imageExistencePromises.push(
-  //       fs
-  //         .access(imgPath)
-  //         .then(() => null)
-  //         .catch(
-  //           () =>
-  //             `Несуществующий файл изображения "${imgSrc}" в файле: ${filename}`
-  //         )
-  //     );
-  //   }
-  // });
-
-  // const imageErrors = await Promise.all(imageExistencePromises);
-  // imageErrors
-  //   .filter(error => error !== null)
-  //   .forEach(error => results.push(error));
-
-  $('img[src^="./"], script[src^="./"], link[href^="./"]').each((i, el) => {
-    const srcOrHref = $(el).attr('src') || $(el).attr('href');
-    results.push(`Недопустимый путь ("./"): ${srcOrHref} в файле: ${filename}`);
-  });
-
+  // Дополнительные проверки для изображений
   $('img').each((i, el) => {
-    const altText = $(el).attr('alt');
-    const imgSrc = $(el).attr('src') || 'неизвестный источник';
-    if (typeof altText === 'undefined') {
+    const src = $(el).attr('src');
+    const alt = $(el).attr('alt');
+    if (!alt) {
       results.push(
-        `Отсутствует атрибут alt у изображения "${imgSrc}" в файле: ${filename}`
+        `Отсутствует атрибут alt у изображения "${src}" в файле: ${filename}`
       );
     }
   });
 
-  $('a[href^="mailto:"]').each((i, el) => {
-    const email = $(el).attr('href').slice(7).toLowerCase();
-    emailAddresses.add(email);
-  });
-
-  $('a[href^="tel:"]').each((i, el) => {
-    const phoneRaw = $(el).attr('href').slice(4).toLowerCase();
-    const phone = phoneRaw.replace(/[^\d]/g, '');
-    phoneNumbers.add(phone);
-  });
-
-  $('a[href^="mailto:"]').each((i, el) => {
-    const emailHref = $(el).attr('href').slice(7).toLowerCase();
-
-    const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g;
-    let emailTextMatch = $(el).text().toLowerCase().match(emailRegex);
-    let emailText = emailTextMatch ? emailTextMatch[0].toLowerCase() : '';
-
-    if (!emailTextMatch || !emailTextMatch.includes(emailHref)) {
-      const childEmailsText = $(el)
-        .find('*')
-        .map((i, child) => $(child).text().toLowerCase())
-        .get()
-        .join(' ');
-      let childEmailMatch = childEmailsText.match(emailRegex);
-      emailText = childEmailMatch
-        ? childEmailMatch[0].toLowerCase()
-        : emailText;
-    }
-
-    emailAddresses.add(emailHref);
-
-    if (emailHref !== emailText) {
-      results.push(
-        `Разные email адреса в ${filename}: ${emailText} | ${emailHref}`
-      );
-    }
-  });
-
-  forms.each((i, form) => {
-    if ($(form).find('input[type="checkbox"]').length === 0) {
-      formCheck = false;
-      results.push(`Форма без чекбокса найдена в файле: ${filename}`);
-    }
-  });
-
+  // Проверка форм
   $('form').each((i, form) => {
     const action = $(form).attr('action');
     if (!action || !action.endsWith('.php')) {
@@ -165,31 +71,15 @@ async function processHtmlFile(
       );
     }
 
-    $(form)
-      .find('input:not([type="submit"])')
-      .each((j, input) => {
-        const inputElement = $(input);
-        const hasRequired =
-          inputElement.attr('required') === '' ||
-          inputElement.attr('required') === 'required';
-
-        if (!hasRequired) {
-          results.push(
-            `Отсутствует атрибут required у input в файле: ${filename}`
-          );
-        }
-
-        const hasName = inputElement.attr('name') !== undefined;
-
-        if (!hasName) {
-          results.push(`Отсутствует атрибут name у input в файле: ${filename}`);
-        }
-      });
+    const checkboxes = $(form).find('input[type="checkbox"]');
+    if (checkboxes.length === 0) {
+      results.push(`Форма без чекбокса найдена в файле: ${filename}`);
+    }
   });
 
+  // Проверка заголовков и мета-тегов
   const title = $('title').text();
   const description = $('meta[name="description"]').attr('content');
-
   if (titles.has(title) || descriptions.has(description)) {
     results.push(`Дублированные мета теги найдены в файле: ${filename}`);
   } else {
@@ -197,58 +87,42 @@ async function processHtmlFile(
     descriptions.add(description);
   }
 
+  // Проверка количества тегов h1
   const h1Tags = $('h1');
   if (h1Tags.length !== 1) {
     results.push(`Найдено ${h1Tags.length} тегов h1 в файле: ${filename}`);
   }
+}
 
-  if (filename.endsWith('.html')) {
-    const links = $('a');
-
-    for (let i = 0; i < links.length; i++) {
-      const link = links[i];
-      const href = $(link).attr('href');
-      if (href === '' || href === undefined || href === '#') {
-        results.push(
-          `Недопустимая ссылка (пустая или отсутствует) (${href}) обнаружена в файле: ${filename}`
-        );
-        continue;
-      }
-      if (href) {
-        if (
-          href.startsWith('#') ||
-          href.endsWith('.html') ||
-          href.includes('#')
-        ) {
-          continue;
-        } else if (
-          !href.includes('http') &&
-          !href.includes('tel:') &&
-          !href.includes('mailto')
-        ) {
-          results.push(
-            `Недопустимая ссылка (href: ${href}) обнаружена в файле: ${filename}`
-          );
-        }
-      }
-    }
+// Вспомогательные функции для асинхронной проверки
+async function checkAnchor(pagePath, anchor, originFile) {
+  try {
+    const pageContent = await fs.readFile(pagePath, 'utf-8');
+    const $page = cheerio.load(pageContent);
+    return !$page(`#${anchor}`).length
+      ? `Якорь "#${anchor}" не найден на странице "${pagePath}" в документе: ${originFile}`
+      : null;
+  } catch (err) {
+    return `Ошибка при чтении страницы "${pagePath}": ${err.message}`;
   }
+}
 
-  // if (filename.endsWith('.html')) {
-  //   const links = $('a[href^="#"]');
-  //   links.each((i, link) => {
-  //     const href = $(link).attr('href');
-  //     if (href.length > 1) {
-  //       const anchorId = href.substring(1);
-  //       const target = $(`#${anchorId}`);
-  //       if (target.length === 0) {
-  //         results.push(
-  //           `Отсутствует якорь для ссылки ${href} в файле: ${filename}`
-  //         );
-  //       }
-  //     }
-  //   });
-  // }
+async function checkPageExists(pagePath, originFile) {
+  try {
+    await fs.access(pagePath);
+    return null;
+  } catch (err) {
+    return `Ссылка на несуществующую страницу "${pagePath}" в документе: ${originFile}`;
+  }
+}
+
+async function checkFileExists(filePath, errorMessage) {
+  try {
+    await fs.access(filePath);
+    return null;
+  } catch (err) {
+    return errorMessage;
+  }
 }
 
 module.exports = {
