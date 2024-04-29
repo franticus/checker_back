@@ -2,36 +2,56 @@ const fs = require('fs-extra');
 const path = require('path');
 const statisticsPath = path.join(__dirname, '..', 'statistics.json');
 const checkedArchiveDir = path.join(__dirname, '..', 'checkedArchive');
-
+const dataBaseCheckedArchiveDir = path.join(
+  __dirname,
+  '..',
+  'dataBaseCheckedArchive'
+);
 const updateStatistics = require('../helpers/updateStatistics');
 
 function getStats(req, res) {
-  updateStatistics(stats => {
-    stats.visits = (stats.visits || 0) + 1;
-  });
-
   fs.readdir(checkedArchiveDir)
-    .then(files => {
-      const archivesDatabaseCount = files.length;
-      fs.readJson(statisticsPath, { throws: false })
-        .then(stats => {
-          if (!stats) {
-            stats = {
-              visits: 0,
-              archivesDatabase: 0,
-              archivesChecked: 0,
-              textsStolen: 0,
-              textsApplied: 0,
-            };
-          }
+    .then(checkedFiles => {
+      const archivesDatabaseCount = checkedFiles.length;
 
-          stats.archivesDatabase = archivesDatabaseCount;
+      // Получаем количество файлов в папке dataBaseCheckedArchive
+      fs.readdir(dataBaseCheckedArchiveDir)
+        .then(transferredFiles => {
+          const transferredFilesCount = transferredFiles.length;
 
-          res.json(stats);
+          // Обновляем статистику с помощью функции updateStatistics
+          updateStatistics(stats => {
+            stats.archivesDatabase = archivesDatabaseCount;
+            stats.transferedFiles = transferredFilesCount;
+          });
+
+          // Чтение и отправка статистики
+          fs.readJson(statisticsPath, { throws: false })
+            .then(stats => {
+              if (!stats) {
+                stats = {
+                  transferedFiles: 0,
+                  archivesDatabase: 0,
+                  archivesChecked: 0,
+                  textsStolen: 0,
+                  textsApplied: 0,
+                };
+              }
+
+              res.json(stats);
+            })
+            .catch(err => {
+              console.error(`Ошибка при чтении файла статистики: ${err}`);
+              res.status(500).send('Ошибка при чтении файла статистики');
+            });
         })
         .catch(err => {
-          console.error(`Ошибка при чтении файла статистики: ${err}`);
-          res.status(500).send('Ошибка при чтении файла статистики');
+          console.error(
+            `Ошибка при чтении директории dataBaseCheckedArchive: ${err}`
+          );
+          res
+            .status(500)
+            .send('Ошибка при чтении директории dataBaseCheckedArchive');
         });
     })
     .catch(err => {

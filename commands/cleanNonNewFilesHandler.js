@@ -7,8 +7,12 @@ async function cleanNonNewFilesHandler(req, res) {
   try {
     const files = await fs.readdir(checkedArchiveDir);
 
+    // Регулярное выражение, которое соответствует только английским буквам, цифрам, '_', '-', '.'
+    const englishAlphabetAndSymbolsRegex = /^[a-zA-Z0-9_.\-]+$/;
+
     for (const file of files) {
-      if (!file.toLowerCase().startsWith('new_v')) {
+      // Проверяем, содержит ли название файла только английские буквы, цифры, '_', '-', '.'
+      if (!englishAlphabetAndSymbolsRegex.test(file)) {
         await fs.unlink(path.join(checkedArchiveDir, file));
       }
     }

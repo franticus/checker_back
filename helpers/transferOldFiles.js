@@ -2,6 +2,7 @@ const fs = require('fs-extra');
 const path = require('path');
 
 const checkedArchiveDir = path.resolve(__dirname, '..', 'checkedArchive');
+const updateStatistics = require('../helpers/updateStatistics');
 const dataBaseCheckedArchiveDir = path.resolve(
   __dirname,
   '..',
