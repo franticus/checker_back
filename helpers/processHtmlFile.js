@@ -75,18 +75,19 @@ async function processHtmlFile(
   errors.filter(e => e).forEach(error => results.push(error));
 
   // Дополнительные проверки для favicon
-  $('link[rel="icon"]').each((i, elem) => {
+  $('link[rel="icon"], link[rel="shortcut icon"]').each(async (i, elem) => {
     const href = $(elem).attr('href');
-    const faviconPath = path.resolve(
+    const faviconPath = path.join(
       extractPath,
       href.startsWith('/') ? href.slice(1) : href
     );
 
-    if (!fs.existsSync(faviconPath)) {
+    try {
+      await fs.promises.access(faviconPath);
+    } catch (err) {
       results.push(`Отсутствует файл favicon: ${href} в файле ${filename}`);
     }
   });
-
   // Дополнительные проверки для изображений
   $('img').each((i, el) => {
     const src = $(el).attr('src');
