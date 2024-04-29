@@ -32,7 +32,6 @@ function compareText(text1, text2) {
 
 function compareWithCheckedArchive(newText) {
   const files = fs.readdirSync(checkedArchiveDir);
-
   const results = [];
 
   files.forEach(file => {
@@ -54,7 +53,6 @@ function compareWithCheckedArchive(newText) {
     }
   });
 
-  // Записываем результаты сравнения в JSON файл в корне проекта
   const outputFilePath = path.join(__dirname, '..', 'comparisonResults.json');
   fs.writeFileSync(outputFilePath, JSON.stringify(results, null, 2));
   console.log(`Comparison results saved to ${outputFilePath}`);
@@ -74,8 +72,9 @@ async function unpackAndSavePlainText(filePath, originalFileName) {
 
   // Создаем объект для хранения информации о каждой странице
   const siteData = {
-    name: archiveName, // Используем имя архива без расширения
+    name: archiveName,
     pages: {},
+    date: new Date().toISOString(),
   };
 
   for (const entry of zipEntries) {
