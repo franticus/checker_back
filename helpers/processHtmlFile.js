@@ -118,27 +118,82 @@ async function processHtmlFile(
   $('a').each((i, el) => {
     const href = $(el).attr('href');
     if (href && href.startsWith('mailto:')) {
-      const emailAddress = href.substring(7); // Вырезаем 'mailto:'
+      const emailAddress = href.substring(7); // Убираем 'mailto:'
       if (!emailAddress.endsWith('@gmail.com')) {
         results.push(
           `Недопустимый email адрес '${emailAddress}' в документе: ${filename}`
         );
       }
-      emailAddresses.add(emailAddress); // Добавляем в набор для учета всех найденных email
+      emailAddresses.add(emailAddress); // Добавляем в набор для учёта всех найденных email
     }
   });
 
-  // Проверка, что используется только один email адрес на всех страницах
-  if (emailAddresses.size > 1) {
-  } else if (emailAddresses.size === 1) {
-    const commonEmail = emailAddresses.values().next().value;
-    if (!commonEmail.endsWith('@gmail.com')) {
+  const emailPattern = /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g;
+
+  // Функция для проверки и добавления email адресов
+  function checkAndAddEmail(email, source, results) {
+    if (!email.endsWith('@gmail.com')) {
       results.push(
-        `Используемый email адрес '${commonEmail}' не заканчивается на @gmail.com.`
+        `Недопустимый email адрес '${email}' в документе: ${source}`
       );
     }
-  } else {
-    results.push(`Не найдено ни одного email адреса в проекте.`);
+    emailAddresses.add(email);
+  }
+
+  $('a').each((i, el) => {
+    const href = $(el).attr('href');
+    if (href && href.startsWith('mailto:')) {
+      const emailAddress = href.substring(7);
+      checkAndAddEmail(emailAddress, `ссылка ${href}`, results);
+    }
+    // Поиск в href
+    const emailsInHref = href && href.match(emailPattern);
+    if (emailsInHref) {
+      emailsInHref.forEach(email =>
+        checkAndAddEmail(email, `ссылка ${href}`, results)
+      );
+    }
+  });
+
+  // Поиск в тексте страницы
+  const text = $('body').text();
+  const emailsInText = text.match(emailPattern);
+  if (emailsInText) {
+    emailsInText.forEach(email =>
+      checkAndAddEmail(email, 'текст страницы', results)
+    );
+  }
+
+  // Поиск во всех атрибутах, исключая элементы input
+  $('*:not(input)').each((i, el) => {
+    Object.entries(el.attribs).forEach(([attrName, attrValue]) => {
+      // Исключаем атрибуты placeholder у всех элементов
+      if (attrName === 'placeholder') return;
+
+      const emailsInAttr = attrValue.match(emailPattern);
+      if (emailsInAttr) {
+        emailsInAttr.forEach(email => {
+          checkAndAddEmail(
+            email,
+            `атрибут ${attrName} элемента ${el.tagName}`,
+            results
+          );
+        });
+      }
+    });
+  });
+
+  // Проверка уникальности и правильности формата email после сбора всех адресов
+  if (emailAddresses.size > 0) {
+    const allEmails = Array.from(emailAddresses);
+    const uniqueEmail = allEmails[0];
+    if (allEmails.every(email => email === uniqueEmail)) {
+      if (!uniqueEmail.endsWith('@gmail.com')) {
+        results.push(
+          `Используемый email адрес '${uniqueEmail}' не заканчивается на '@gmail.com'.`
+        );
+      }
+    }
   }
 
   // Проверка наличия тега <main>
