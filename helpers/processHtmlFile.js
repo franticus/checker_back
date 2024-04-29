@@ -113,6 +113,33 @@ async function processHtmlFile(
     }
   });
 
+  // Проверка email
+  $('a').each((i, el) => {
+    const href = $(el).attr('href');
+    if (href && href.startsWith('mailto:')) {
+      const emailAddress = href.substring(7); // Вырезаем 'mailto:'
+      if (!emailAddress.endsWith('@gmail.com')) {
+        results.push(
+          `Недопустимый email адрес '${emailAddress}' в документе: ${filename}`
+        );
+      }
+      emailAddresses.add(emailAddress); // Добавляем в набор для учета всех найденных email
+    }
+  });
+
+  // Проверка, что используется только один email адрес на всех страницах
+  if (emailAddresses.size > 1) {
+  } else if (emailAddresses.size === 1) {
+    const commonEmail = emailAddresses.values().next().value;
+    if (!commonEmail.endsWith('@gmail.com')) {
+      results.push(
+        `Используемый email адрес '${commonEmail}' не заканчивается на @gmail.com.`
+      );
+    }
+  } else {
+    results.push(`Не найдено ни одного email адреса в проекте.`);
+  }
+
   // Проверка наличия тега <main>
   const mainExists = $('main').length > 0;
   if (!mainExists) {
