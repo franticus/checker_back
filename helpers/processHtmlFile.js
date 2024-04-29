@@ -16,22 +16,25 @@ async function processHtmlFile(
   const $ = cheerio.load(content);
   const checkPromises = [];
 
-  // Проверка внешних ссылок, исключая допустимые ссылки на Google Maps
   $('a').each((i, el) => {
     const href = $(el).attr('href');
-    if (!href) return;
+    if (!href) return; // Если href не существует, пропускаем
 
+    // Проверка на якорные ссылки внутри той же страницы
     if (href.startsWith('#')) {
       if (href.length > 1 && !$(href).length) {
         results.push(`Якорь "${href}" не найден в документе: ${filename}`);
       }
+      // Проверка на внутренние ссылки с якорями
     } else if (href.includes('.html#')) {
       const [page, anchor] = href.split('#');
       const pagePath = path.join(extractPath, page);
       checkPromises.push(checkAnchor(pagePath, anchor, filename));
+      // Проверка на внутренние ссылки на другие HTML страницы
     } else if (href.endsWith('.html')) {
       const pagePath = path.join(extractPath, href);
       checkPromises.push(checkPageExists(pagePath, filename));
+      // Проверка на допустимые внешние ссылки, исключая Google Maps
     } else if (
       (href.startsWith('http://') || href.startsWith('https://')) &&
       !href.includes('google.com/maps') &&
@@ -40,6 +43,18 @@ async function processHtmlFile(
       results.push(
         `Недопустимая внешняя ссылка: ${href} в документе: ${filename}`
       );
+      // Проверка на недопустимые пути ссылок
+    } else if (href.startsWith('/') || href === '#') {
+      // Проверяем, что это не просто корневой путь или заглушка
+      if (href === '/' || href === '#') {
+        results.push(
+          `Недопустимая ссылка-заглушка: ${href} в документе: ${filename}`
+        );
+      } else {
+        // Проверяем, что ссылка ведет на существующую страницу или ID
+        const pagePath = path.join(extractPath, href);
+        checkPromises.push(checkPageExists(pagePath, filename));
+      }
     }
   });
 
