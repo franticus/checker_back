@@ -1,786 +1,714 @@
 [
   {
-    "name": "New_v9_ChaÌ_Artesanal",
+    "name": "New_v9_NebulaCos",
     "uniquePercentage": 0
   },
   {
-    "name": "New_v8_backaryy",
+    "name": "New_v9_Ambrosia",
+    "uniquePercentage": 71
+  },
+  {
+    "name": "New_v9_TalentForge",
     "uniquePercentage": 75
   },
   {
-    "name": "New_v9_blissfulgifting",
+    "name": "New_v9_StarlightGem",
     "uniquePercentage": 77
   },
   {
-    "name": "New_v9_musicloaner",
-    "uniquePercentage": 77
-  },
-  {
-    "name": "New_v9_sportifyshop",
-    "uniquePercentage": 77
-  },
-  {
-    "name": "New_v9_swayingseat",
-    "uniquePercentage": 77
-  },
-  {
-    "name": "New_v9_Tempo",
+    "name": "New_v9_Reflection",
     "uniquePercentage": 78
   },
   {
-    "name": "New_v9_activeattire",
+    "name": "New_v9_babystrollers",
     "uniquePercentage": 78
   },
   {
-    "name": "New_v9_bridalblissboutique",
-    "uniquePercentage": 78
-  },
-  {
-    "name": "New_v9_chiccarrybags",
-    "uniquePercentage": 78
-  },
-  {
-    "name": "New_v9_Aluguer de Automoveis",
+    "name": "New_v8_PedalPicks",
     "uniquePercentage": 79
   },
   {
-    "name": "New_v9_BoardGames",
+    "name": "New_v9_ArtVivo",
     "uniquePercentage": 79
   },
   {
-    "name": "New_v9_CafeteriaBrasileira",
+    "name": "New_v9_AuraGlow-fix",
     "uniquePercentage": 79
   },
   {
-    "name": "New_v9_Entrega Expressa",
+    "name": "New_v9_elitealloyrims",
     "uniquePercentage": 79
   },
   {
-    "name": "New_v9_FarinhaFresca",
-    "uniquePercentage": 79
-  },
-  {
-    "name": "New_v9_TaxiBrasilExpresso",
-    "uniquePercentage": 79
-  },
-  {
-    "name": "New_v9_gardendecoworld",
-    "uniquePercentage": 79
-  },
-  {
-    "name": "New_v9_laminatemarket",
-    "uniquePercentage": 79
-  },
-  {
-    "name": "New_v9_workoutwardrobe",
-    "uniquePercentage": 79
-  },
-  {
-    "name": "New_v8_RioMorada",
+    "name": "New_v8_CaseCraze",
     "uniquePercentage": 80
   },
   {
-    "name": "New_v9_ChaMisterioso",
+    "name": "New_v9_Ambiance",
     "uniquePercentage": 80
   },
   {
-    "name": "New_v9_FlorArte",
+    "name": "New_v9_SkillSetSail",
     "uniquePercentage": 80
   },
   {
-    "name": "New_v9_MagiaDeFestas",
+    "name": "New_v9_baglady",
     "uniquePercentage": 80
   },
   {
-    "name": "New_v9_PinnacleDriveDealership",
-    "uniquePercentage": 80
-  },
-  {
-    "name": "New_v9_PlantShop",
-    "uniquePercentage": 80
-  },
-  {
-    "name": "New_v9_PortasBrasil",
-    "uniquePercentage": 80
-  },
-  {
-    "name": "New_v8_SparkleSale",
+    "name": "New_v8_Carpetopia",
     "uniquePercentage": 81
   },
   {
-    "name": "New_v9_ GoalSphere",
+    "name": "New_v8_LuxeBlend",
     "uniquePercentage": 81
   },
   {
-    "name": "New_v9_ PillowDesigns",
+    "name": "New_v8_SereniCraft_Bed",
     "uniquePercentage": 81
   },
   {
-    "name": "New_v9_Charme",
+    "name": "New_v8_wallets",
     "uniquePercentage": 81
   },
   {
-    "name": "New_v9_NatalCameras_BRAZIL",
+    "name": "New_v9_ActiveLife",
     "uniquePercentage": 81
   },
   {
-    "name": "New_v9_OfficeFlow_2",
+    "name": "New_v9_Decorum",
     "uniquePercentage": 81
   },
   {
-    "name": "New_v9_TileTrends",
+    "name": "New_v9_Designify",
     "uniquePercentage": 81
   },
   {
-    "name": "New_v8_VirtuServe",
+    "name": "New_v9_Epoch",
+    "uniquePercentage": 81
+  },
+  {
+    "name": "New_v9_Estetica",
+    "uniquePercentage": 81
+  },
+  {
+    "name": "New_v9_KashpoCreations",
+    "uniquePercentage": 81
+  },
+  {
+    "name": "New_v9_Purest",
+    "uniquePercentage": 81
+  },
+  {
+    "name": "New_v9_ReadRise",
+    "uniquePercentage": 81
+  },
+  {
+    "name": "New_v9_TechBazaar",
+    "uniquePercentage": 81
+  },
+  {
+    "name": "New_v9_sailawayboats",
+    "uniquePercentage": 81
+  },
+  {
+    "name": "New_v9_sleeppillowsmattresses",
+    "uniquePercentage": 81
+  },
+  {
+    "name": "New_v9_tropicalrattanhome",
+    "uniquePercentage": 81
+  },
+  {
+    "name": "New_v8_Oasis_Casino_Resort",
     "uniquePercentage": 82
   },
   {
-    "name": "New_v8_backary",
+    "name": "New_v9_CampCove",
     "uniquePercentage": 82
   },
   {
-    "name": "New_v9_Excursions",
+    "name": "New_v9_CycloneBikes",
     "uniquePercentage": 82
   },
   {
-    "name": "New_v9_Harmonia Corporal",
+    "name": "New_v9_EdiGo",
     "uniquePercentage": 82
   },
   {
-    "name": "New_v9_LearnEdExpress_BRAZIL",
+    "name": "New_v9_Eleganza_2",
     "uniquePercentage": 82
   },
   {
-    "name": "New_v9_Peluvios",
+    "name": "New_v9_FitVibe",
     "uniquePercentage": 82
   },
   {
-    "name": "New_v9_PowerSupply",
+    "name": "New_v9_Flight",
     "uniquePercentage": 82
   },
   {
-    "name": "New_v8_lights",
+    "name": "New_v9_LexiSpeak",
+    "uniquePercentage": 82
+  },
+  {
+    "name": "New_v9_PowerFlex",
+    "uniquePercentage": 82
+  },
+  {
+    "name": "New_v9_Relaxify",
+    "uniquePercentage": 82
+  },
+  {
+    "name": "New_v9_StrideHaven",
+    "uniquePercentage": 82
+  },
+  {
+    "name": "New_v9_TasteTrek_2",
+    "uniquePercentage": 82
+  },
+  {
+    "name": "New_v9_TravelPros",
+    "uniquePercentage": 82
+  },
+  {
+    "name": "New_v9_Veil",
+    "uniquePercentage": 82
+  },
+  {
+    "name": "New_v9_alloyavenue",
+    "uniquePercentage": 82
+  },
+  {
+    "name": "New_v9_animalstore",
+    "uniquePercentage": 82
+  },
+  {
+    "name": "New_v9_bestsleep",
+    "uniquePercentage": 82
+  },
+  {
+    "name": "New_v9_brushboutique",
+    "uniquePercentage": 82
+  },
+  {
+    "name": "New_v9_catcasa",
+    "uniquePercentage": 82
+  },
+  {
+    "name": "New_v9_chairify",
+    "uniquePercentage": 82
+  },
+  {
+    "name": "New_v9_cozylinens",
+    "uniquePercentage": 82
+  },
+  {
+    "name": "New_v9_dishwaredreams",
+    "uniquePercentage": 82
+  },
+  {
+    "name": "New_v9_elitedeskchairs",
+    "uniquePercentage": 82
+  },
+  {
+    "name": "New_v9_laminateland",
+    "uniquePercentage": 82
+  },
+  {
+    "name": "New_v9_paintanddecor",
+    "uniquePercentage": 82
+  },
+  {
+    "name": "New_v9_petalpulse",
+    "uniquePercentage": 82
+  },
+  {
+    "name": "New_v9_zenithceilings",
+    "uniquePercentage": 82
+  },
+  {
+    "name": "NEw_v8_Lumina",
     "uniquePercentage": 83
   },
   {
-    "name": "New_v9_ACPro",
+    "name": "New_v8_MachLube",
     "uniquePercentage": 83
   },
   {
-    "name": "New_v9_Coworking_BRAZIL",
+    "name": "New_v8_PortalProwess",
     "uniquePercentage": 83
   },
   {
-    "name": "New_v9_Event_BRAZIL",
+    "name": "New_v8_Vividora",
     "uniquePercentage": 83
   },
   {
-    "name": "New_v9_GiftBloom",
+    "name": "New_v8_VoyageQuest",
     "uniquePercentage": 83
   },
   {
-    "name": "New_v9_StyleMakers",
+    "name": "New_v8_bags",
     "uniquePercentage": 83
   },
   {
-    "name": "New_v9_VR_Development_BRAZIL",
+    "name": "New_v9_AgriPure",
     "uniquePercentage": 83
   },
   {
-    "name": "New_v9_Virtualista",
+    "name": "New_v9_Aureate",
     "uniquePercentage": 83
   },
   {
-    "name": "New_V9_VigilNet",
+    "name": "New_v9_AutoAccessories",
+    "uniquePercentage": 83
+  },
+  {
+    "name": "New_v9_ConnectIndiaBroadband",
+    "uniquePercentage": 83
+  },
+  {
+    "name": "New_v9_GameStore",
+    "uniquePercentage": 83
+  },
+  {
+    "name": "New_v9_HomeDecor",
+    "uniquePercentage": 83
+  },
+  {
+    "name": "New_v9_IndulgentDelights",
+    "uniquePercentage": 83
+  },
+  {
+    "name": "New_v9_KidFest",
+    "uniquePercentage": 83
+  },
+  {
+    "name": "New_v9_Lumiere",
+    "uniquePercentage": 83
+  },
+  {
+    "name": "New_v9_Maverick",
+    "uniquePercentage": 83
+  },
+  {
+    "name": "New_v9_Riffend",
+    "uniquePercentage": 83
+  },
+  {
+    "name": "New_v9_Tabletops",
+    "uniquePercentage": 83
+  },
+  {
+    "name": "New_v9_Taxi",
+    "uniquePercentage": 83
+  },
+  {
+    "name": "New_v9_TeaCoffee",
+    "uniquePercentage": 83
+  },
+  {
+    "name": "New_v9_Viralize",
+    "uniquePercentage": 83
+  },
+  {
+    "name": "New_v9_VitaMart",
+    "uniquePercentage": 83
+  },
+  {
+    "name": "New_v9_WashWizards",
+    "uniquePercentage": 83
+  },
+  {
+    "name": "New_v9_aqualeisurefinds",
+    "uniquePercentage": 83
+  },
+  {
+    "name": "New_v9_blissfulbakeshop",
+    "uniquePercentage": 83
+  },
+  {
+    "name": "New_v9_cathavenrealty",
+    "uniquePercentage": 83
+  },
+  {
+    "name": "New_v9_gifthaven",
+    "uniquePercentage": 83
+  },
+  {
+    "name": "NEw_v8_PEtala",
     "uniquePercentage": 84
   },
   {
-    "name": "New_v9_FixRight",
+    "name": "New_V9_WebStart",
     "uniquePercentage": 84
   },
   {
-    "name": "New_v9_Maravilha",
+    "name": "New_v8_AutomailGenius",
     "uniquePercentage": 84
   },
   {
-    "name": "New_v9_RentDeskSpace",
+    "name": "New_v8_Blueprint",
     "uniquePercentage": 84
   },
   {
-    "name": "New_v9_CarRent_BRAZIL",
+    "name": "New_v8_CarpetVista",
+    "uniquePercentage": 84
+  },
+  {
+    "name": "New_v8_RatnaRustic",
+    "uniquePercentage": 84
+  },
+  {
+    "name": "New_v8_vegas",
+    "uniquePercentage": 84
+  },
+  {
+    "name": "New_v9_ClickGenie",
+    "uniquePercentage": 84
+  },
+  {
+    "name": "New_v9_Decorn",
+    "uniquePercentage": 84
+  },
+  {
+    "name": "New_v9_EbookHub",
+    "uniquePercentage": 84
+  },
+  {
+    "name": "New_v9_FloralDelight",
+    "uniquePercentage": 84
+  },
+  {
+    "name": "New_v9_GlamourOasis",
+    "uniquePercentage": 84
+  },
+  {
+    "name": "New_v9_GreenHarmony",
+    "uniquePercentage": 84
+  },
+  {
+    "name": "New_v9_HomeChem",
+    "uniquePercentage": 84
+  },
+  {
+    "name": "New_v9_Petal",
+    "uniquePercentage": 84
+  },
+  {
+    "name": "New_v9_StationeryStore",
+    "uniquePercentage": 84
+  },
+  {
+    "name": "New_v9_SymphonyMaven",
+    "uniquePercentage": 84
+  },
+  {
+    "name": "New_v9_TrekPak",
+    "uniquePercentage": 84
+  },
+  {
+    "name": "New_v9_ZeroRunner",
+    "uniquePercentage": 84
+  },
+  {
+    "name": "New_v9_boatbay",
+    "uniquePercentage": 84
+  },
+  {
+    "name": "New_v9_dolldress",
+    "uniquePercentage": 84
+  },
+  {
+    "name": "New_v9_insight-hunt",
+    "uniquePercentage": 84
+  },
+  {
+    "name": "New_v9_purrfectbowls",
+    "uniquePercentage": 84
+  },
+  {
+    "name": "New_V9_VantagePulseMarketing",
+    "uniquePercentage": 85
+  },
+  {
+    "name": "New_v8_LuxeLuck.",
+    "uniquePercentage": 85
+  },
+  {
+    "name": "New_v8_SerenityStretch",
+    "uniquePercentage": 85
+  },
+  {
+    "name": "New_v8_sportclothes",
+    "uniquePercentage": 85
+  },
+  {
+    "name": "New_v9_Bicycles",
+    "uniquePercentage": 85
+  },
+  {
+    "name": "New_v9_Bookish",
+    "uniquePercentage": 85
+  },
+  {
+    "name": "New_v9_CookEase",
+    "uniquePercentage": 85
+  },
+  {
+    "name": "New_v9_EcoGoods",
+    "uniquePercentage": 85
+  },
+  {
+    "name": "New_v9_ElectricWheel",
+    "uniquePercentage": 85
+  },
+  {
+    "name": "New_v9_EmpowerInsightSolutions",
+    "uniquePercentage": 85
+  },
+  {
+    "name": "New_v9_Eurotours",
+    "uniquePercentage": 85
+  },
+  {
+    "name": "New_v9_HomeCraftHub",
+    "uniquePercentage": 85
+  },
+  {
+    "name": "New_v9_MilkBliss",
+    "uniquePercentage": 85
+  },
+  {
+    "name": "New_v9_PedalParadise",
+    "uniquePercentage": 85
+  },
+  {
+    "name": "New_v9_RollersHot",
+    "uniquePercentage": 85
+  },
+  {
+    "name": "New_v9_StrikeMaster",
+    "uniquePercentage": 85
+  },
+  {
+    "name": "New_v9_TrimTrove",
+    "uniquePercentage": 85
+  },
+  {
+    "name": "New_v9_fitstrong",
+    "uniquePercentage": 85
+  },
+  {
+    "name": "New_v9_vendings",
+    "uniquePercentage": 85
+  },
+  {
+    "name": "New_v8_SwadSafar",
     "uniquePercentage": 86
+  },
+  {
+    "name": "New_v8_aquarium-fish",
+    "uniquePercentage": 86
+  },
+  {
+    "name": "New_v8_architecture",
+    "uniquePercentage": 86
+  },
+  {
+    "name": "New_v9_ArtGallery",
+    "uniquePercentage": 86
+  },
+  {
+    "name": "New_v9_ExploreHorizon",
+    "uniquePercentage": 86
+  },
+  {
+    "name": "New_v9_Heracles",
+    "uniquePercentage": 86
+  },
+  {
+    "name": "New_v9_IndiaDriveSchool",
+    "uniquePercentage": 86
+  },
+  {
+    "name": "New_v9_LandscapeDesign",
+    "uniquePercentage": 86
+  },
+  {
+    "name": "New_v9_LightRoom",
+    "uniquePercentage": 86
+  },
+  {
+    "name": "New_v9_MareoFit",
+    "uniquePercentage": 86
+  },
+  {
+    "name": "New_v9_RadiantMeadowsHotel",
+    "uniquePercentage": 86
+  },
+  {
+    "name": "New_v9_Streth-celing",
+    "uniquePercentage": 86
+  },
+  {
+    "name": "New_v9_TreeTove",
+    "uniquePercentage": 86
+  },
+  {
+    "name": "New_v9_ZumbaVibe",
+    "uniquePercentage": 86
+  },
+  {
+    "name": "New_v9_buildersindiasolutions",
+    "uniquePercentage": 86
+  },
+  {
+    "name": "New_v8_parfume",
+    "uniquePercentage": 87
+  },
+  {
+    "name": "New_v8_spices",
+    "uniquePercentage": 87
+  },
+  {
+    "name": "New_v9_Confectionery",
+    "uniquePercentage": 87
+  },
+  {
+    "name": "New_v9_DesignMuse",
+    "uniquePercentage": 87
+  },
+  {
+    "name": "New_v9_FTyoga",
+    "uniquePercentage": 87
+  },
+  {
+    "name": "New_v9_SuccessChronicles",
+    "uniquePercentage": 87
+  },
+  {
+    "name": "new_v8_Zenith",
+    "uniquePercentage": 87
+  },
+  {
+    "name": "New_v8_MangoMantra",
+    "uniquePercentage": 88
   },
   {
     "name": "New_v8_PlatePalooza",
     "uniquePercentage": 88
   },
   {
-    "name": "New_v8_Palacio de Cristal",
+    "name": "New_v8_SeaBetsParadise",
+    "uniquePercentage": 90
+  },
+  {
+    "name": "New_v9_NatalCameras_BRAZIL",
+    "uniquePercentage": 93
+  },
+  {
+    "name": "New_v8_lights",
     "uniquePercentage": 94
   },
   {
-    "name": "New_v9_AutoAccessories",
+    "name": "New_v9_CarRent_BRAZIL",
+    "uniquePercentage": 94
+  },
+  {
+    "name": "New_v9_FixRight",
+    "uniquePercentage": 94
+  },
+  {
+    "name": "New_V9_VigilNet",
+    "uniquePercentage": 95
+  },
+  {
+    "name": "New_v9_GiftBloom",
+    "uniquePercentage": 95
+  },
+  {
+    "name": "New_v9_ACPro",
+    "uniquePercentage": 96
+  },
+  {
+    "name": "New_v9_FlorArte",
+    "uniquePercentage": 96
+  },
+  {
+    "name": "New_v9_Maravilha",
+    "uniquePercentage": 96
+  },
+  {
+    "name": "New_v9_RentDeskSpace",
+    "uniquePercentage": 96
+  },
+  {
+    "name": "New_v9_MagiaDeFestas",
     "uniquePercentage": 97
   },
   {
-    "name": "New_v9_DesignMuse",
+    "name": "New_v9_Virtualista",
     "uniquePercentage": 97
   },
   {
-    "name": "New_v9_TreeTove",
+    "name": "New_v9_workoutwardrobe",
     "uniquePercentage": 97
   },
   {
-    "name": "NEw_v8_Lumina",
+    "name": "New_v9_BoardGames",
     "uniquePercentage": 98
   },
   {
-    "name": "NEw_v8_PEtala",
+    "name": "New_v9_Coworking_BRAZIL",
     "uniquePercentage": 98
   },
   {
-    "name": "New_V9_VantagePulseMarketing",
+    "name": "New_v9_FarinhaFresca",
     "uniquePercentage": 98
   },
   {
-    "name": "New_V9_WebStart",
+    "name": "New_v9_Peluvios",
     "uniquePercentage": 98
   },
   {
-    "name": "New_v8_AutomailGenius",
+    "name": "New_v9_PlantShop",
     "uniquePercentage": 98
   },
   {
-    "name": "New_v8_Blueprint",
+    "name": "New_v9_StyleMakers",
     "uniquePercentage": 98
   },
   {
-    "name": "New_v8_CarpetVista",
+    "name": "New_v9_TileTrends",
     "uniquePercentage": 98
   },
   {
-    "name": "New_v8_Carpetopia",
+    "name": "New_v9_bridalblissboutique",
     "uniquePercentage": 98
   },
   {
-    "name": "New_v8_CaseCraze",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v8_LuxeBlend",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v8_LuxeLuck.",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v8_MachLube",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v8_MangoMantra",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v8_Oasis_Casino_Resort",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v8_PedalPicks",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v8_PortalProwess",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v8_RatnaRustic",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v8_SereniCraft_Bed",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v8_SerenityStretch",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v8_SwadSafar",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v8_Vividora",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v8_VoyageQuest",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v8_aquarium-fish",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v8_architecture",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v8_bags",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v8_parfume",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v8_spices",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v8_sportclothes",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v8_vegas",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v8_wallets",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_ RecipeWorld",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_ TeaHarmony",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_ActiveLife",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_AgriPure",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_Ambiance",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_Ambrosia",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_ArtGallery",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_ArtVivo",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_AuraGlow-fix",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_Aureate",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_Bicycles",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_Bookish",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_CampCove",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_ClickGenie",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_Confectionery",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_ConnectIndiaBroadband",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_CycloneBikes",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_Decorn",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_Decorum",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_Designify",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_EcoGoods",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_EdiGo",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_ElectricWheel",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_Eleganza_2",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_EmpowerInsightSolutions",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_Epoch",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_Estetica",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_Eurotours",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_ExploreHorizon",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_FTyoga",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_FitFusion Club",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_FitVibe",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_Flight",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_GameStore",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_GlamourOasis",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_GreenHarmony",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_HomeChem",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_HomeCraftHub",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_IndulgentDelights",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_KashpoCreations",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_KidFest",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_LandscapeDesign",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_Laser Strike Hub",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_LexiSpeak",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_LightRoom",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_Lumiere",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_MareoFit",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_Maverick",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_MilkBliss",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_MusiCore School",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_PedalParadise",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_Petal",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_PowerFlex",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_Purest",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_RadiantMeadowsHotel",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_ReadRise",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_Reflection",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_Relaxify",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_Riffend",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_RollersHot",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_SkillSetSail",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_StarlightGem",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_Streth-celing",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_StrideHaven",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_StrikeMaster",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_SuccessChronicles",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_Sweet Creations Factory",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_SymphonyMaven",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_TalentForge",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_TasteTrek_2",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_TeaCoffee",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_TechBazaar",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_TravelPros",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_TrekPak",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_Veil",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_VitaMart",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_Vivid Artistry Institute",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_Zenith Skyline",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_ZeroRunner",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_ZumbaVibe",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_alloyavenue",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_animalstore",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_aqualeisurefinds",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_babystrollers",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_baglady",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_bestsleep",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_blissfulbakeshop",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_boatbay",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_brushboutique",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_buildersindiasolutions",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_catcasa",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_cathavenrealty",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_chairify",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_cozylinens",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_elitealloyrims",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_elitedeskchairs",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_fitstrong",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_gifthaven",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_laminateland",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_paintanddecor",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_petalpulse",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_purrfectbowls",
-    "uniquePercentage": 98
-  },
-  {
-    "name": "New_v9_sailawayboats",
-    "uniquePercentage": 98
+    "name": "New_v8_RioMorada",
+    "uniquePercentage": 99
   },
   {
-    "name": "New_v9_sleeppillowsmattresses",
-    "uniquePercentage": 98
+    "name": "New_v8_SparkleSale",
+    "uniquePercentage": 99
   },
   {
-    "name": "New_v9_tropicalrattanhome",
-    "uniquePercentage": 98
+    "name": "New_v8_VirtuServe",
+    "uniquePercentage": 99
   },
   {
-    "name": "New_v9_zenithceilings",
-    "uniquePercentage": 98
+    "name": "New_v8_autoschool-Malaysia",
+    "uniquePercentage": 99
   },
   {
-    "name": "new_v8_Zenith",
-    "uniquePercentage": 98
+    "name": "New_v8_backary",
+    "uniquePercentage": 99
   },
   {
-    "name": "New_v8_SeaBetsParadise",
+    "name": "New_v8_backaryy",
     "uniquePercentage": 99
   },
   {
@@ -788,75 +716,87 @@
     "uniquePercentage": 99
   },
   {
-    "name": "New_v9_CookEase",
+    "name": "New_v9_CafeteriaBrasileira",
     "uniquePercentage": 99
   },
   {
-    "name": "New_v9_EbookHub",
+    "name": "New_v9_ChaMisterioso",
     "uniquePercentage": 99
   },
   {
-    "name": "New_v9_Eventful Delights",
+    "name": "New_v9_Charme",
     "uniquePercentage": 99
   },
   {
-    "name": "New_v9_FloralDelight",
+    "name": "New_v9_Event_BRAZIL",
     "uniquePercentage": 99
   },
   {
-    "name": "New_v9_HomeDecor",
+    "name": "New_v9_Excursions",
     "uniquePercentage": 99
   },
   {
-    "name": "New_v9_IndiaDriveSchool",
+    "name": "New_v9_LearnEdExpress_BRAZIL",
     "uniquePercentage": 99
   },
   {
-    "name": "New_v9_StationeryStore",
+    "name": "New_v9_OfficeFlow_2",
     "uniquePercentage": 99
   },
   {
-    "name": "New_v9_Tabletops",
+    "name": "New_v9_PinnacleDriveDealership",
     "uniquePercentage": 99
   },
   {
-    "name": "New_v9_Taxi",
+    "name": "New_v9_PortasBrasil",
     "uniquePercentage": 99
   },
   {
-    "name": "New_v9_TrimTrove",
+    "name": "New_v9_PowerSupply",
     "uniquePercentage": 99
   },
   {
-    "name": "New_v9_Viralize",
+    "name": "New_v9_TaxiBrasilExpresso",
     "uniquePercentage": 99
   },
   {
-    "name": "New_v9_WashWizards",
+    "name": "New_v9_Tempo",
     "uniquePercentage": 99
   },
   {
-    "name": "New_v9_WebCraft Studios",
+    "name": "New_v9_VR_Development_BRAZIL",
     "uniquePercentage": 99
   },
   {
-    "name": "New_v9_dishwaredreams",
+    "name": "New_v9_activeattire",
     "uniquePercentage": 99
   },
   {
-    "name": "New_v9_dolldress",
+    "name": "New_v9_blissfulgifting",
     "uniquePercentage": 99
   },
   {
-    "name": "New_v9_insight-hunt",
+    "name": "New_v9_chiccarrybags",
     "uniquePercentage": 99
   },
   {
-    "name": "New_v9_vendings",
+    "name": "New_v9_gardendecoworld",
     "uniquePercentage": 99
   },
   {
-    "name": "New_v8_autoschool-Malaysia",
-    "uniquePercentage": 100
+    "name": "New_v9_laminatemarket",
+    "uniquePercentage": 99
+  },
+  {
+    "name": "New_v9_musicloaner",
+    "uniquePercentage": 99
+  },
+  {
+    "name": "New_v9_sportifyshop",
+    "uniquePercentage": 99
+  },
+  {
+    "name": "New_v9_swayingseat",
+    "uniquePercentage": 99
   }
 ]

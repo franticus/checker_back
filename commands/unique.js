@@ -35,21 +35,24 @@ function compareWithCheckedArchive(newText) {
   const results = [];
 
   files.forEach(file => {
-    const filePath = path.join(checkedArchiveDir, file);
-    try {
-      const jsonContent = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-      if (jsonContent && jsonContent.name && jsonContent.pages) {
-        const combinedText = Object.values(jsonContent.pages).join(' ');
-        const uniquePercentage = compareText(newText, combinedText);
-        results.push({
-          name: jsonContent.name,
-          uniquePercentage: uniquePercentage,
-        });
-      } else {
-        console.error(`Invalid JSON format in file: ${filePath}`);
+    // Игнорируем скрытые файлы и файлы с записями "._"
+    if (!file.startsWith('.') && !file.startsWith('._')) {
+      const filePath = path.join(checkedArchiveDir, file);
+      try {
+        const jsonContent = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+        if (jsonContent && jsonContent.name && jsonContent.pages) {
+          const combinedText = Object.values(jsonContent.pages).join(' ');
+          const uniquePercentage = compareText(newText, combinedText);
+          results.push({
+            name: jsonContent.name,
+            uniquePercentage: uniquePercentage,
+          });
+        } else {
+          console.error(`Invalid JSON format in file: ${filePath}`);
+        }
+      } catch (error) {
+        console.error(`Error reading JSON file ${filePath}:`, error);
       }
-    } catch (error) {
-      console.error(`Error reading JSON file ${filePath}:`, error);
     }
   });
 
@@ -79,12 +82,22 @@ async function unpackAndSavePlainText(filePath, originalFileName) {
 
   for (const entry of zipEntries) {
     if (entry.entryName.endsWith('.html')) {
-      const content = zip.readAsText(entry);
-      const plainText = stripTags(content);
-      const pageName = path.basename(entry.entryName, '.html');
-      siteData.pages[pageName] = plainText; // Сохраняем текст страницы в объект
+      // Проверяем, что ключ не начинается с "._"
+      if (!entry.entryName.startsWith('._')) {
+        const content = zip.readAsText(entry);
+        const plainText = stripTags(content);
+        const pageName = path.basename(entry.entryName, '.html');
+        siteData.pages[pageName] = plainText; // Сохраняем текст страницы в объект
+      }
     }
   }
+
+  // Удаляем все ключи из объекта, начинающиеся с "._"
+  Object.keys(siteData.pages).forEach(key => {
+    if (key.startsWith('._')) {
+      delete siteData.pages[key];
+    }
+  });
 
   // Создаем JSON файл и записываем в него данные
   const jsonFileName = archiveName + '.json'; // Используем имя архива без расширения для JSON файла
