@@ -4,6 +4,7 @@ const path = require('path');
 
 const emailAddresses = new Set();
 const phoneNumbers = new Set();
+const usedLangs = new Set();
 
 async function processHtmlFile(
   filename,
@@ -234,6 +235,21 @@ async function processHtmlFile(
   const h1Tags = $('h1');
   if (h1Tags.length !== 1) {
     results.push(`Найдено ${h1Tags.length} тегов h1 в файле: ${filename}`);
+  }
+
+  // Проверка атрибута lang
+  const lang = $('html').attr('lang');
+  if (lang) {
+    usedLangs.add(lang);
+  } else {
+    results.push(`Отсутствует атрибут lang в файле: ${filename}`);
+  }
+  if (usedLangs.size > 1) {
+    results.push(
+      `Найдены различные значения атрибута lang: ${Array.from(usedLangs).join(
+        ', '
+      )}`
+    );
   }
 }
 
