@@ -21,7 +21,7 @@ async function processHtmlFile(
     if (!href) return; // Если href не существует, пропускаем
 
     // Проверка на якорные ссылки внутри той же страницы
-    if (href.startsWith('#')) {
+    if (href.startsWith('#') && href.length > 1) {
       if (href.length > 1 && !$(href).length) {
         results.push(`Якорь "${href}" не найден в документе: ${filename}`);
       }
