@@ -2,7 +2,6 @@ const fs = require('fs-extra');
 const path = require('path');
 
 const checkedArchiveDir = path.resolve(__dirname, '..', 'checkedArchive');
-const updateStatistics = require('../helpers/updateStatistics');
 const dataBaseCheckedArchiveDir = path.resolve(
   __dirname,
   '..',
@@ -20,11 +19,12 @@ function transferOldFiles() {
     const filePath = path.join(checkedArchiveDir, file);
     const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
     const fileDate = new Date(data.date);
-    const sixtyDaysAgo = new Date(
+    const twentyDaysAgo = new Date(
       currentDate.getTime() - 20 * 24 * 60 * 60 * 1000
     ); // 20 дней в миллисекундах
 
-    if (fileDate < sixtyDaysAgo) {
+    // Проверка на наличие даты и корректность даты
+    if (isNaN(fileDate.getTime()) || fileDate < twentyDaysAgo) {
       const newLocation = path.join(dataBaseCheckedArchiveDir, file);
       fs.renameSync(filePath, newLocation); // Перемещаем или заменяем файл
       console.log(`File moved: ${file}`);
