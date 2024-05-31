@@ -19,11 +19,32 @@ async function processHtmlFile(
 
   $('a').each((i, el) => {
     const href = $(el).attr('href');
-    if (!href) return; // Если href не существует, пропускаем
+
+    // Проверка на наличие атрибута href и его пустое значение
+    if (typeof href === 'undefined' || href === '') {
+      results.push(
+        `Ссылка без атрибута href или с пустым значением в документе: ${filename}`
+      );
+      return;
+    }
+
+    // Проверка на ссылки-заглушки
+    if (
+      href === '#' ||
+      href === "'#'" ||
+      href === '"#"' ||
+      href === "' '" ||
+      href === '" "'
+    ) {
+      results.push(
+        `Недопустимая ссылка-заглушка: ${href} в документе: ${filename}`
+      );
+      return;
+    }
 
     // Проверка на якорные ссылки внутри той же страницы
     if (href.startsWith('#') && href.length > 1) {
-      if (href.length > 1 && !$(href).length) {
+      if (!$(href).length) {
         results.push(`Якорь "${href}" не найден в документе: ${filename}`);
       }
       // Проверка на внутренние ссылки с якорями
