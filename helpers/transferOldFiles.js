@@ -21,8 +21,8 @@ function transferOldFiles() {
     const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
     const fileDate = new Date(data.date);
     const sixtyDaysAgo = new Date(
-      currentDate.getTime() - 60 * 24 * 60 * 60 * 1000
-    ); // 60 дней в миллисекундах
+      currentDate.getTime() - 20 * 24 * 60 * 60 * 1000
+    ); // 20 дней в миллисекундах
 
     if (fileDate < sixtyDaysAgo) {
       const newLocation = path.join(dataBaseCheckedArchiveDir, file);
