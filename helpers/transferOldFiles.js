@@ -5,7 +5,7 @@ const checkedArchiveDir = path.resolve(__dirname, '..', 'checkedArchive');
 const dataBaseCheckedArchiveDir = path.resolve(
   __dirname,
   '..',
-  'DataBaseCheckedArchive'
+  'dataBaseCheckedArchive'
 );
 
 function transferOldFiles() {
