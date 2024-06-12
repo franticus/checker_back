@@ -18,6 +18,8 @@ const transferOldFiles = require('./helpers/transferOldFiles');
 const port = 80;
 const apiUrl = 'checkerzip-myfirst27.amvera.io';
 
+//lololo
+
 const corsOptions = {
   origin: function (origin, callback) {
     const allowedOrigins = [
