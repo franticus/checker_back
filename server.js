@@ -15,33 +15,33 @@ const cleanUploadsHandler = require('./commands/cleanUploadsHandler');
 const cleanNonNewFilesHandler = require('./commands/cleanNonNewFilesHandler');
 const transferOldFiles = require('./helpers/transferOldFiles');
 
-const port = 80;
+const port = 3000;
 
-const corsOptions = {
-  origin: function (origin, callback) {
-    const allowedOrigins = [
-      'https://checkersite.netlify.app',
-      'https://checker-zip-frantunn.amvera.io',
-      'https://checker-zip-frantunn.amvera.io/stats',
-      'https://checker-zip-frantunn.amvera.io/steal',
-      'https://checker-zip-frantunn.amvera.io/apply',
-      'https://checker-zip-frantunn.amvera.io/upload',
-      'https://checker-zip-frantunn.amvera.io/uniquetest',
-      'https://checker-zip-frantunn.amvera.io/cleanuploads',
-      'https://checker-zip-frantunn.amvera.io/cleanNonNewFiles',
-    ];
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('CORS not allowed for this origin'));
-    }
-  },
-  methods: ['GET', 'POST'],
-};
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     const allowedOrigins = [
+//       'https://checkersite.netlify.app',
+//       'https://checker-zip-frantunn.amvera.io',
+//       'https://checker-zip-frantunn.amvera.io/stats',
+//       'https://checker-zip-frantunn.amvera.io/steal',
+//       'https://checker-zip-frantunn.amvera.io/apply',
+//       'https://checker-zip-frantunn.amvera.io/upload',
+//       'https://checker-zip-frantunn.amvera.io/uniquetest',
+//       'https://checker-zip-frantunn.amvera.io/uniquetest_url',
+//       'https://checker-zip-frantunn.amvera.io/cleanuploads',
+//     ];
+//     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('CORS not allowed for this origin'));
+//     }
+//   },
+//   methods: ['GET', 'POST'],
+// };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
-// app.use(cors());
+app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
