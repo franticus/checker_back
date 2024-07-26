@@ -16,33 +16,8 @@ const cleanNonNewFilesHandler = require('./commands/cleanNonNewFilesHandler');
 const transferOldFiles = require('./helpers/transferOldFiles');
 
 const port = 80;
-const apiUrl = 'checkerzip-myfirst27.amvera.io';
 
-//lololo
-
-const corsOptions = {
-  origin: function (origin, callback) {
-    const allowedOrigins = [
-      'https://checkersite.netlify.app',
-      `${apiUrl}`,
-      `${apiUrl}/stats`,
-      `${apiUrl}/steal`,
-      `${apiUrl}/apply`,
-      `${apiUrl}/upload`,
-      `${apiUrl}/uniquetest`,
-      `${apiUrl}/cleanuploads`,
-      `${apiUrl}/cleanNonNewFiles`,
-    ];
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('CORS not allowed for this origin'));
-    }
-  },
-  methods: ['GET', 'POST'],
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 
 // app.use(cors());
 app.use(express.json());
