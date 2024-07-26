@@ -30,11 +30,16 @@ module.exports = function nameCheckHandler(req, res) {
     const normalizedNames = allNames.map(name => normalizeName(name));
 
     let isUnique = true;
-    const exactMatches = normalizedNames.filter(
-      name => name === normalizedCompanyName
-    );
-    if (exactMatches.length > 0) {
-      isUnique = false;
+
+    // Проверка на точное совпадение или подстроку
+    for (const name of normalizedNames) {
+      if (
+        name.includes(normalizedCompanyName) ||
+        normalizedCompanyName.includes(name)
+      ) {
+        isUnique = false;
+        break;
+      }
     }
 
     const matches = stringSimilarity.findBestMatch(
