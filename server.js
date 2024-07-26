@@ -14,6 +14,7 @@ const updateStatistics = require('./helpers/updateStatistics');
 const cleanUploadsHandler = require('./commands/cleanUploadsHandler');
 const cleanNonNewFilesHandler = require('./commands/cleanNonNewFilesHandler');
 const transferOldFiles = require('./helpers/transferOldFiles');
+const nameCheckHandler = require('./commands/nameCheckHandler');
 
 const port = 80;
 
@@ -55,6 +56,8 @@ app.get('/stats', statsHandler);
 app.post('/cleanuploads', cleanUploadsHandler);
 
 app.post('/cleanNonNewFiles', cleanNonNewFilesHandler);
+
+app.post('/namecheck', nameCheckHandler);
 
 app.post('/transferOldFiles', (req, res) => {
   try {

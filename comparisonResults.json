@@ -4,11 +4,11 @@
     "uniquePercentage": 0
   },
   {
-    "name": "New_v9_LumenHouse",
-    "uniquePercentage": 72
+    "name": "New_v9_SaffronBrewCafe",
+    "uniquePercentage": 71
   },
   {
-    "name": "New_v9_SaffronBrewCafe",
+    "name": "New_v9_LumenHouse",
     "uniquePercentage": 72
   },
   {
@@ -18,6 +18,10 @@
   {
     "name": "New_v9_SweetTooth",
     "uniquePercentage": 73
+  },
+  {
+    "name": "CanadaGearRentals_Canada",
+    "uniquePercentage": 74
   },
   {
     "name": "MajesticRollHotel_India",
@@ -58,10 +62,6 @@
   {
     "name": "wincasinoroyalace",
     "uniquePercentage": 74
-  },
-  {
-    "name": "CanadaGearRentals_Canada",
-    "uniquePercentage": 75
   },
   {
     "name": "Casino_Canada_ElitePlayEquipment",
@@ -216,6 +216,10 @@
     "uniquePercentage": 76
   },
   {
+    "name": "New_v9_UrbanOasisDelhi",
+    "uniquePercentage": 76
+  },
+  {
     "name": "OpalWatersResort_India",
     "uniquePercentage": 76
   },
@@ -234,6 +238,10 @@
   {
     "name": "sparklemart",
     "uniquePercentage": 76
+  },
+  {
+    "name": "BestFantasyWicketGames",
+    "uniquePercentage": 77
   },
   {
     "name": "BonusFinder",
@@ -269,6 +277,10 @@
   },
   {
     "name": "India_alfrescofires",
+    "uniquePercentage": 77
+  },
+  {
+    "name": "India_fortune",
     "uniquePercentage": 77
   },
   {
@@ -360,10 +372,6 @@
     "uniquePercentage": 77
   },
   {
-    "name": "New_v9_UrbanOasisDelhi",
-    "uniquePercentage": 77
-  },
-  {
     "name": "New_v9_cleanco",
     "uniquePercentage": 77
   },
@@ -404,6 +412,10 @@
     "uniquePercentage": 77
   },
   {
+    "name": "playpit",
+    "uniquePercentage": 77
+  },
+  {
     "name": "rollgear",
     "uniquePercentage": 77
   },
@@ -425,10 +437,6 @@
   },
   {
     "name": "BestCricketMatchIndia",
-    "uniquePercentage": 78
-  },
-  {
-    "name": "BestFantasyWicketGames",
     "uniquePercentage": 78
   },
   {
@@ -460,6 +468,10 @@
     "uniquePercentage": 78
   },
   {
+    "name": "HighStakes",
+    "uniquePercentage": 78
+  },
+  {
     "name": "Hotel_Bahamas_ParadiseCoveResort",
     "uniquePercentage": 78
   },
@@ -469,10 +481,6 @@
   },
   {
     "name": "India_caressence",
-    "uniquePercentage": 78
-  },
-  {
-    "name": "India_fortune",
     "uniquePercentage": 78
   },
   {
@@ -668,10 +676,6 @@
     "uniquePercentage": 78
   },
   {
-    "name": "cruisebet",
-    "uniquePercentage": 78
-  },
-  {
     "name": "elitebet",
     "uniquePercentage": 78
   },
@@ -689,10 +693,6 @@
   },
   {
     "name": "johngameAustralia",
-    "uniquePercentage": 78
-  },
-  {
-    "name": "playpit",
     "uniquePercentage": 78
   },
   {
@@ -744,6 +744,10 @@
     "uniquePercentage": 79
   },
   {
+    "name": "EuphoriaStay",
+    "uniquePercentage": 79
+  },
+  {
     "name": "Fantasy Hoops Magic Courts",
     "uniquePercentage": 79
   },
@@ -761,10 +765,6 @@
   },
   {
     "name": "HighRollerHavenIndia",
-    "uniquePercentage": 79
-  },
-  {
-    "name": "HighStakes",
     "uniquePercentage": 79
   },
   {
@@ -880,6 +880,10 @@
     "uniquePercentage": 79
   },
   {
+    "name": "New_v8.1_DiamondPeak",
+    "uniquePercentage": 79
+  },
+  {
     "name": "New_v8.1_StarlightCasino_India",
     "uniquePercentage": 79
   },
@@ -948,6 +952,10 @@
     "uniquePercentage": 79
   },
   {
+    "name": "New_v9_Shine",
+    "uniquePercentage": 79
+  },
+  {
     "name": "New_v9_SpiceDelightCatering",
     "uniquePercentage": 79
   },
@@ -997,6 +1005,10 @@
   },
   {
     "name": "TopPlayer",
+    "uniquePercentage": 79
+  },
+  {
+    "name": "TropicBreezeIndia",
     "uniquePercentage": 79
   },
   {
@@ -1069,10 +1081,6 @@
   },
   {
     "name": "resortgreatestexplorer",
-    "uniquePercentage": 79
-  },
-  {
-    "name": "royalflush",
     "uniquePercentage": 79
   },
   {
@@ -1172,10 +1180,6 @@
     "uniquePercentage": 80
   },
   {
-    "name": "EuphoriaStay",
-    "uniquePercentage": 80
-  },
-  {
     "name": "FlashFocus",
     "uniquePercentage": 80
   },
@@ -1269,10 +1273,6 @@
   },
   {
     "name": "New_v11_TheaterArts",
-    "uniquePercentage": 80
-  },
-  {
-    "name": "New_v8.1_DiamondPeak",
     "uniquePercentage": 80
   },
   {
@@ -1392,10 +1392,6 @@
     "uniquePercentage": 80
   },
   {
-    "name": "New_v9_Shine",
-    "uniquePercentage": 80
-  },
-  {
     "name": "New_v9_SoundSutra",
     "uniquePercentage": 80
   },
@@ -1429,6 +1425,10 @@
   },
   {
     "name": "PokerStar",
+    "uniquePercentage": 80
+  },
+  {
+    "name": "Pokerpro",
     "uniquePercentage": 80
   },
   {
@@ -1512,10 +1512,6 @@
     "uniquePercentage": 80
   },
   {
-    "name": "TropicBreezeIndia",
-    "uniquePercentage": 80
-  },
-  {
     "name": "Vantage",
     "uniquePercentage": 80
   },
@@ -1584,6 +1580,10 @@
     "uniquePercentage": 80
   },
   {
+    "name": "wagerworld",
+    "uniquePercentage": 80
+  },
+  {
     "name": "winkits",
     "uniquePercentage": 80
   },
@@ -1616,10 +1616,6 @@
     "uniquePercentage": 81
   },
   {
-    "name": "Cricket Carnival",
-    "uniquePercentage": 81
-  },
-  {
     "name": "CricketChampions",
     "uniquePercentage": 81
   },
@@ -1633,6 +1629,10 @@
   },
   {
     "name": "CricketXpress",
+    "uniquePercentage": 81
+  },
+  {
+    "name": "CrownRoyalCasino",
     "uniquePercentage": 81
   },
   {
@@ -1896,10 +1896,6 @@
     "uniquePercentage": 81
   },
   {
-    "name": "Pokerpro",
-    "uniquePercentage": 81
-  },
-  {
     "name": "PortCasino",
     "uniquePercentage": 81
   },
@@ -1996,10 +1992,6 @@
     "uniquePercentage": 81
   },
   {
-    "name": "new_v8.1_ProFantasyCricket",
-    "uniquePercentage": 81
-  },
-  {
     "name": "playcrick",
     "uniquePercentage": 81
   },
@@ -2017,10 +2009,6 @@
   },
   {
     "name": "topfantasycricketgame",
-    "uniquePercentage": 81
-  },
-  {
-    "name": "wagerworld",
     "uniquePercentage": 81
   },
   {
@@ -2044,6 +2032,10 @@
     "uniquePercentage": 82
   },
   {
+    "name": "Cricket Carnival",
+    "uniquePercentage": 82
+  },
+  {
     "name": "Cricket Masters",
     "uniquePercentage": 82
   },
@@ -2060,7 +2052,7 @@
     "uniquePercentage": 82
   },
   {
-    "name": "CrownRoyalCasino",
+    "name": "cricketx",
     "uniquePercentage": 82
   },
   {
@@ -2093,6 +2085,10 @@
   },
   {
     "name": "EvolutionCricket",
+    "uniquePercentage": 82
+  },
+  {
+    "name": "FantasyBatsman",
     "uniquePercentage": 82
   },
   {
@@ -2360,6 +2356,10 @@
     "uniquePercentage": 82
   },
   {
+    "name": "T20 Blast",
+    "uniquePercentage": 82
+  },
+  {
     "name": "TopCricPhoneFantasyGame",
     "uniquePercentage": 82
   },
@@ -2381,10 +2381,6 @@
   },
   {
     "name": "bestwicketprofantasygame",
-    "uniquePercentage": 82
-  },
-  {
-    "name": "cricketx",
     "uniquePercentage": 82
   },
   {
@@ -2480,10 +2476,6 @@
     "uniquePercentage": 83
   },
   {
-    "name": "FantasyBatsman",
-    "uniquePercentage": 83
-  },
-  {
     "name": "FantasyFours",
     "uniquePercentage": 83
   },
@@ -2497,6 +2489,10 @@
   },
   {
     "name": "Flori",
+    "uniquePercentage": 83
+  },
+  {
+    "name": "ForestMiracle-Australia",
     "uniquePercentage": 83
   },
   {
@@ -2589,6 +2585,10 @@
   },
   {
     "name": "New_v8_StylishVase",
+    "uniquePercentage": 83
+  },
+  {
+    "name": "New_v8_WristAdorn",
     "uniquePercentage": 83
   },
   {
@@ -2688,10 +2688,6 @@
     "uniquePercentage": 83
   },
   {
-    "name": "PokerPro",
-    "uniquePercentage": 83
-  },
-  {
     "name": "PrestigePeakIndia",
     "uniquePercentage": 83
   },
@@ -2720,10 +2716,6 @@
     "uniquePercentage": 83
   },
   {
-    "name": "T20 Blast",
-    "uniquePercentage": 83
-  },
-  {
     "name": "VelvetGardenIndia",
     "uniquePercentage": 83
   },
@@ -2741,6 +2733,10 @@
   },
   {
     "name": "Wicket Wonders",
+    "uniquePercentage": 83
+  },
+  {
+    "name": "crickace",
     "uniquePercentage": 83
   },
   {
@@ -2800,15 +2796,7 @@
     "uniquePercentage": 84
   },
   {
-    "name": "FantasyWicket",
-    "uniquePercentage": 84
-  },
-  {
     "name": "FantasyWorld",
-    "uniquePercentage": 84
-  },
-  {
-    "name": "ForestMiracle-Australia",
     "uniquePercentage": 84
   },
   {
@@ -2864,6 +2852,10 @@
     "uniquePercentage": 84
   },
   {
+    "name": "New_v8_BlenBay",
+    "uniquePercentage": 84
+  },
+  {
     "name": "New_v8_DreamySofas",
     "uniquePercentage": 84
   },
@@ -2873,10 +2865,6 @@
   },
   {
     "name": "New_v8_India-Gourmet-Academy",
-    "uniquePercentage": 84
-  },
-  {
-    "name": "New_v8_WristAdorn",
     "uniquePercentage": 84
   },
   {
@@ -2944,10 +2932,6 @@
     "uniquePercentage": 84
   },
   {
-    "name": "crickace",
-    "uniquePercentage": 84
-  },
-  {
     "name": "cricketplayground",
     "uniquePercentage": 84
   },
@@ -2972,10 +2956,6 @@
     "uniquePercentage": 85
   },
   {
-    "name": "CricketChamps",
-    "uniquePercentage": 85
-  },
-  {
     "name": "FantasyStumps",
     "uniquePercentage": 85
   },
@@ -2997,10 +2977,6 @@
   },
   {
     "name": "New_v11_TalkPro",
-    "uniquePercentage": 85
-  },
-  {
-    "name": "New_v8_BlenBay",
     "uniquePercentage": 85
   },
   {
@@ -3428,10 +3404,6 @@
     "uniquePercentage": 97
   },
   {
-    "name": "LuckyCasino",
-    "uniquePercentage": 97
-  },
-  {
     "name": "Montagne_France",
     "uniquePercentage": 97
   },
@@ -3629,6 +3601,10 @@
   },
   {
     "name": "Netherlands_jackpotinn",
+    "uniquePercentage": 98
+  },
+  {
+    "name": "New_8_proprint",
     "uniquePercentage": 98
   },
   {
@@ -3916,10 +3892,6 @@
     "uniquePercentage": 98
   },
   {
-    "name": "Pinup",
-    "uniquePercentage": 98
-  },
-  {
     "name": "Pokerforall__PT",
     "uniquePercentage": 98
   },
@@ -3968,11 +3940,11 @@
     "uniquePercentage": 98
   },
   {
-    "name": "portuganhar",
+    "name": "Pinup",
     "uniquePercentage": 98
   },
   {
-    "name": "ÐÑÑÐ¸Ð²",
+    "name": "portuganhar",
     "uniquePercentage": 98
   },
   {
@@ -4049,10 +4021,6 @@
   },
   {
     "name": "MirageHotel-Casino-LV",
-    "uniquePercentage": 99
-  },
-  {
-    "name": "New_8_proprint",
     "uniquePercentage": 99
   },
   {
