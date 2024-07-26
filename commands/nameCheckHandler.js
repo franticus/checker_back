@@ -3,7 +3,7 @@ const path = require('path');
 const stringSimilarity = require('string-similarity');
 
 function normalizeName(name) {
-  return name.toLowerCase().replace(/[-_]/g, '');
+  return name.toLowerCase().replace(/[-_]/g, '').replace(/\s+/g, '');
 }
 
 module.exports = function nameCheckHandler(req, res) {
@@ -25,36 +25,36 @@ module.exports = function nameCheckHandler(req, res) {
       return res.status(500).send('Ошибка сервера');
     }
 
-    let isUnique = true;
     const comparisonResults = JSON.parse(data);
     const allNames = comparisonResults.map(result => result.name);
     const normalizedNames = allNames.map(name => normalizeName(name));
+
+    let isUnique = true;
+    const exactMatches = normalizedNames.filter(
+      name => name === normalizedCompanyName
+    );
+    if (exactMatches.length > 0) {
+      isUnique = false;
+    }
+
     const matches = stringSimilarity.findBestMatch(
       normalizedCompanyName,
       normalizedNames
     ).ratings;
-
     matches.sort((a, b) => b.rating - a.rating);
 
     const topMatches = matches.slice(0, 5);
 
-    for (const match of topMatches) {
-      if (match.target.includes(normalizedCompanyName)) {
-        isUnique = false;
-        break;
-      }
-    }
-
-    if (isUnique) {
+    if (!isUnique) {
       res.send({
-        message: `Название "${companyName}" уникально.`,
+        message: `Название "${companyName}" уже используется.`,
         similar: topMatches.map(
           match => allNames[normalizedNames.indexOf(match.target)]
         ),
       });
     } else {
       res.send({
-        message: `Название "${companyName}" уже используется.`,
+        message: `Название "${companyName}" уникально.`,
         similar: topMatches.map(
           match => allNames[normalizedNames.indexOf(match.target)]
         ),
